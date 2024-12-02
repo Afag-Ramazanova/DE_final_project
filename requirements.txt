@@ -1,0 +1,12 @@
+#Formatting
+black
+ruff
+pylint
+
+#Testing
+pytest
+pytest-cov
+nbval
+
+#Flask
+flask
