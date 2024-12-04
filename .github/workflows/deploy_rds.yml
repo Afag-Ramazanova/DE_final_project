@@ -1,0 +1,38 @@
+name: Deploy RDS with CloudFormation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-rds:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Deploy CloudFormation Template
+      run: |
+        aws cloudformation deploy \
+          --template-file rds-cloudformation-template.yml \
+          --stack-name rds-stack \
+          --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM
+
+    - name: Confirm Stack Deployment
+      run: |
+        aws cloudformation describe-stacks --stack-name rds-stack
+
+    # - name: Install Dependencies
+    #   run: pip install pymysql
+  
+    # - name: Load Data into RDS
+    #   run: python load_data.py
