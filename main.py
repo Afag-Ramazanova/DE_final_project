@@ -20,10 +20,11 @@ def analyze():
         writer = csv.writer(file)
         writer.writerow([message, timestamp])
     
-    # Pass the message to data.py for further operations (simple print for now)
-    data.process_message(message)  # Calls the function in data.py
+    # Pass the message to data.py and get the result
+    result = data.process_message(message)  # Capture the result from process_message
     
-    return f"Message received: {message}"
+    # Return the result to the user (or send it to a different template for rendering)
+    return f"Message received: {message} <br> Query Result: {result}"
 
 if __name__ == '__main__':
     app.run(debug=True)
