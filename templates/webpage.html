@@ -1,102 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chat Interface</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-        #chat-container {
-            width: 60%;
-            max-width: 800px;
-            height: 70%;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        #chat-area {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-        .message {
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-        .user-message {
-            text-align: right;
-        }
-        .user-message span {
-            background-color: #0078d7;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 15px;
-            display: inline-block;
-        }
-        .system-message span {
-            background-color: #e0e0e0;
-            color: #333;
-            padding: 8px 12px;
-            border-radius: 15px;
-            display: inline-block;
-        }
-        #input-container {
-            display: flex;
-            padding: 10px;
-            border-top: 1px solid #ddd;
-            background-color: #fff;
-        }
-        #query-input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-            font-size: 16px;
-            outline: none;
-        }
-        #send-btn {
-            padding: 10px 20px;
-            margin-left: 10px;
-            border: none;
-            border-radius: 20px;
-            background-color: #0078d7;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            outline: none;
-        }
-        #send-btn:hover {
-            background-color: #005bb5;
-        }
-    </style>
+    <title>Simple Calculator</title>
 </head>
 <body>
-    <div id="chat-container">
-        <div id="chat-area">
-            <!-- Example messages -->
-            <div class="message user-message">
-                <span>Hello, how can I help?</span>
-            </div>
-            <div class="message system-message">
-                <span>Can you help me calculate something?</span>
-            </div>
-        </div>
-        <div id="input-container">
-            <input type="text" id="query-input" placeholder="Type your message here..." />
-            <button id="send-btn">Send</button>
-        </div>
-    </div>
+    <h1>How Can I Help You?/h1>
+    <form action="/analyze" method="post">
+        <label for="chatMessage">Type your message:</label><br>
+        <textarea id="chatMessage" name="chatMessage" rows="4" cols="50" required></textarea><br><br>
+        <button type="submit">Submit Message</button>
+    </form>
 </body>
 </html>
