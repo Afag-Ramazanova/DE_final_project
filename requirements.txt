@@ -9,4 +9,7 @@ pytest-cov
 nbval
 
 #Flask
-flask==2.2.2
+flask
+
+# Load test
+locust
