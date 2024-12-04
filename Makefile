@@ -1,30 +1,29 @@
-# Install dependencies
-install:
-	pip install --upgrade pip &&\
-		pip install -r requirements.txt
+# Define the image name
+IMAGE_NAME = mini_12_rr
+DOCKER_ID_USER = rrandev25
 
-# Run tests in the backend folder
-test:
-	python -m pytest -vv backend/test_*.py
+# Build the Docker image
+build:
+	docker build -t $(IMAGE_NAME) .
 
-# Format Python code
-format:
-	black .
+# Run the Docker container
+run:
+	docker run -p 5000:5000 $(IMAGE_NAME)
 
-# Lint Python code
-lint:
-	ruff check backend/*.py 
+# Remove the Docker image
+clean:
+	docker rmi $(IMAGE_NAME)
 
-# Lint Dockerfile
-container-lint:
-	docker run --rm -i hadolint/hadolint < backend/Dockerfile
+image_show:
+	docker images
 
-# Refactor: Format and Lint together
-refactor: format lint
+container_show:
+	docker ps
 
-# Deploy (placeholder)
-deploy:
-	# Add your deployment steps here
+push:
+	docker login
+	docker tag $(IMAGE_NAME) $(DOCKER_ID_USER)/$(IMAGE_NAME)
+	docker push $(DOCKER_ID_USER)/$(IMAGE_NAME):latest
 
-# Default target: Run all tasks
-all: install lint test format deploy
+login:
+	docker login -u ${DOCKER_ID_USER}
