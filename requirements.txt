@@ -10,3 +10,6 @@ nbval
 
 #Flask
 flask
+
+# Load test
+locust
