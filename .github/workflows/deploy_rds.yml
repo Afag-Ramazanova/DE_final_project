@@ -25,12 +25,16 @@ jobs:
         aws cloudformation deploy \
           --template-file rds-cloudformation-template.yml \
           --stack-name rds-stack \
+          --parameter-overrides \
+            VPCId=${{ secrets.VPC_ID }} \
+            SubnetIds=${{ secrets.SUBNET_IDS }} \
           --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM
 
     - name: Confirm Stack Deployment
       run: |
         aws cloudformation describe-stacks --stack-name rds-stack
 
+    # Uncomment and configure the following steps if needed
     # - name: Install Dependencies
     #   run: pip install pymysql
   
