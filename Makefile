@@ -9,7 +9,7 @@ install:
 
 # Run tests in the backend folder
 test:
-	python -m pytest -vv backend/test_*.py
+	python -m pytest -vv test.py
 
 # Format Python code
 format:
