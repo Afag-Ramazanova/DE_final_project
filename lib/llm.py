@@ -29,7 +29,7 @@ def convert_to_sql(user_prompt):
                 "anthropic_version": "bedrock-2023-05-31",
                 "max_tokens": 200,
                 "top_k": 250,
-                "temperature": 1,
+                "temperature": 0,
                 "top_p": 0.999,
                 "messages": [{"role": "user", "content": prompt}],
             }
@@ -155,7 +155,7 @@ def validate_sql_query(sql_query):
 
 
 def main():
-    user_prompt = "Show me the names and discount prices of items in the 'Car Electronics' sub-category."
+    user_prompt = "How many items in the 'Car Electronics' sub-category have a rating greater than 4.0?"
     try:
         sql_query = convert_to_sql(user_prompt)
         if not sql_query.strip():
