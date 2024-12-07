@@ -10,5 +10,15 @@
         <textarea id="chatMessage" name="chatMessage" rows="4" cols="50" required></textarea><br><br>
         <button type="submit">Submit Message</button>
     </form>
+
+    <!-- Display results if they exist -->
+    {% if message %}
+        <h2>Results:</h2>
+        <p><strong>Message Received:</strong> {{ message }}</p>
+        <p><strong>SQL Query:</strong> {{ sql_query }}</p>
+        <p><strong>Query Result:</strong> {{ query_result }}</p>
+        <p><strong>Natural Language Result:</strong> {{ natural_language_result }}</p>
+    {% endif %}
+
 </body>
 </html>
