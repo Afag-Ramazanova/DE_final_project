@@ -23,7 +23,7 @@ jobs:
     - name: Native docker ECR login
       id: docker-ecr-login
       run: |
-        result=$(aws ecr get-login-password --region | docker login --username AWS --password-stdin 381492212823.dkr.ecr.us-east-2.amazonaws.com)
+        result=$(aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 381492212823.dkr.ecr.us-east-2.amazonaws.com)
         echo "Login Result: $result"
 
     - name: Build, tag, and push the image to Amazon ECR
