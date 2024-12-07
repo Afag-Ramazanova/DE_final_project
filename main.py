@@ -2,13 +2,13 @@ from flask import Flask, render_template, request
 import csv
 from datetime import datetime
 import data  # Import functions from data.py
-from lib.llm import convert_to_sql, execute_sql_query, generate_combined_response  # Correctly import the functions from llm.py
+from lib.llm import convert_to_sql, execute_sql_query, generate_combined_response
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("webpage.html")  # Render the HTML template
+    return render_template("webpage.html")
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
