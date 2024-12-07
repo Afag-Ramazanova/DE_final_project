@@ -5,7 +5,7 @@ ruff==0.0.251
 # Testing
 pytest==7.1.2
 pytest-cov==3.0.0
-nbval==2.0.0
+nbval==0.11.0
 
 # Web App
 flask==2.2.3
