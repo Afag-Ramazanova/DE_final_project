@@ -92,7 +92,7 @@ The project includes a CI/CD pipeline for streamlined development and deployment
 2. **Lint Code**: Checks for code quality and adherence to standards.
 3. **Format Code**: Automatically formats code for consistency.
 4. **Test Code**: Runs automated tests to validate functionality.
-5. **Deploy**: Builds and pushes the Docker image to ECR, then deploys to AppRunner.
+5. **Deploy**: Builds and pushes the Docker image to ECR. AppRunner service is set up to automatically re-deploy the app when a new container image is pushed to ECR repository.
 
 ## How It Works
 1. The user inputs a natural language question via the web interface.
