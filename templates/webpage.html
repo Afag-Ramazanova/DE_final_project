@@ -70,6 +70,7 @@
             border-radius: 15px;
             position: relative;
             max-width: 80%;
+            transform: translateX(15%);
             margin-left: auto;
             margin-right: auto;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -80,8 +81,8 @@
             content: '';
             position: absolute;
             bottom: -15px; /* Position the tail */
-            left: 50%; /* Center the tail */
-            transform: translateX(-50%);
+            left: 20px;
+            transform: none
             width: 0;
             height: 0;
             border-style: solid;
@@ -121,10 +122,14 @@
 
     <!-- Display results if they exist -->
     {% if message %}
-        <div class="results">
-            <h2>Results:</h2>
-            <p><strong>I received this question:</strong> {{ message }}</p>
-            <p><strong>Based on my query,</strong> {{ natural_language_result }}</p>
+        <div style="display: flex; align-items: center; max-width: 90%; margin: auto; margin-top: 30px;">
+        <!-- Image on the left -->
+        <img src="static/images/happy.png" alt="Chatbot" style="width: 100px; height: auto; border-radius: 10px; margin-right: 20px;">
+            <div class="results">
+                <h2>Results:</h2>
+                <p><strong>I received this question:</strong> {{ message }}</p>
+                <p><strong>Based on my query,</strong> {{ natural_language_result }}</p>
+            </div>
         </div>
 
         <!-- Display SQL query and query result in smaller text -->
