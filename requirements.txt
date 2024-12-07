@@ -10,7 +10,9 @@ nbval
 
 #Web App
 flask
-#gunicorn
 
 # Load Test
 locust
+
+# AWS
+boto3

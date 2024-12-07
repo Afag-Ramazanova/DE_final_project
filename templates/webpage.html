@@ -70,6 +70,14 @@
         .results strong {
             color: #333;
         }
+
+        /* Smaller text for SQL query and result */
+        .small-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 20px;
+        }
+
     </style>
 </head>
 <body>
@@ -84,10 +92,15 @@
     {% if message %}
         <div class="results">
             <h2>Results:</h2>
-            <p><strong>Message Received:</strong> {{ message }}</p>
+            <p><strong>I received this question:</strong> {{ message }}</p>
+            <p><strong>Based on my query,</strong> {{ natural_language_result }}</p>
+        </div>
+
+        <!-- Display SQL query and query result in smaller text -->
+        <div class="small-text">
+            <p><strong>For your reference:</strong></p>
             <p><strong>SQL Query:</strong> {{ sql_query }}</p>
             <p><strong>Query Result:</strong> {{ query_result }}</p>
-            <p><strong>Natural Language Result:</strong> {{ natural_language_result }}</p>
         </div>
     {% endif %}
 </body>

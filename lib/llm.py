@@ -4,7 +4,7 @@ import json
 from botocore.exceptions import ClientError
 
 # Path to your SQLite database
-db_path = "/Users/tusunaiturumbekova/DE_final_project/data/products.db"
+db_path = "/Users/sjtok/ids706/DE_final_project/data/products.db"
 
 # Create a Bedrock Runtime client
 client = boto3.client("bedrock-runtime", region_name="us-west-2")
