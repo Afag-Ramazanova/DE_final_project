@@ -1,17 +1,17 @@
 # Formatting
-black==22.10.0
-ruff==0.0.251
+black
+ruff
 
 # Testing
-pytest==7.1.2
-pytest-cov==3.0.0
-nbval==0.11.0
+pytest
+pytest-cov
+nbval
 
 # Web App
-flask==2.2.3
+flask
 
 # AWS
-boto3==1.26.12
+boto3
 
 # Load Test
-locust==2.5.0
+locust
