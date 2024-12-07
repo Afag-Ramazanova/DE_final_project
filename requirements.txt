@@ -8,9 +8,9 @@ pytest
 pytest-cov
 nbval
 
-#Flask
+#Web App
 flask
 #gunicorn
 
-# Load test
+# Load Test
 locust
