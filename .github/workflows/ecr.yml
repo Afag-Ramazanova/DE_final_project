@@ -19,10 +19,12 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
-    
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Native docker ECR login
+      id: docker-ecr-login
+      run: |
+        result=$(aws ecr get-login-password --region | docker login --username AWS --password-stdin 381492212823.dkr.ecr.us-east-2.amazonaws.com
+        echo "Login Result: $result"
 
     - name: Build, tag, and push the image to Amazon ECR
       id: build-image
