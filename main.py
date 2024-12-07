@@ -2,15 +2,13 @@ from flask import Flask, render_template, request
 import csv
 from datetime import datetime
 import data  # Import functions from data.py
-from lib.llm import generate_response  ##getting the response from the LLM
+from lib.llm import convert_to_sql, execute_sql_query, generate_combined_response  # Correctly import the functions from llm.py
 
 app = Flask(__name__)
-
 
 @app.route("/")
 def index():
     return render_template("webpage.html")  # Render the HTML template
-
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
@@ -23,33 +21,48 @@ def analyze():
         writer = csv.writer(file)
         writer.writerow([message, timestamp])
 
+    try:
+        # Step 1: Convert the message to an SQL query using LLM
+        sql_query = convert_to_sql(message)
+        
+        # Handle invalid or empty SQL query
+        if not sql_query.strip():
+            return render_template(
+                "webpage.html", 
+                message=message, 
+                sql_query="Invalid SQL query", 
+                query_result="No results", 
+                natural_language_result="Sorry, no query could be generated."
+            )
 
-    # Step 1: Pass the message to LLM to convert it into an SQL query
-    llm_prompt = f"Convert the following message to SQL: {message}"  # pass to llm
-    sql_query = generate_response(llm_prompt)  # get the llm response as a query
+        # Step 2: Execute the SQL query to retrieve the results from the database
+        query_result = execute_sql_query(sql_query)
 
-    # Step 2: Use the SQL query in the database
-    query_result = data.process_message(sql_query)
+        # Handle if no query results were found
+        if not query_result:
+            return render_template(
+                "webpage.html", 
+                message=message, 
+                sql_query=sql_query, 
+                query_result="No results found", 
+                natural_language_result="Sorry, no results were found."
+            )
 
-    # Step 3: Pass the query result to the LLM for conversion to normal text
-    llm_prompt_result = f"Convert this SQL query result into a user-friendly description: {query_result}"
-    natural_language_result = generate_response(llm_prompt_result)
+        # Step 3: Generate a natural language response from the query results
+        natural_language_result = generate_combined_response(message, query_result)
 
-    # Pass the results to the template for rendering
-    return render_template(
-        "webpage.html",
-        message=message,
-        sql_query=sql_query,
-        query_result=query_result,
-        natural_language_result=natural_language_result,
-    )
+        # Pass the results to the template for rendering
+        return render_template(
+            "webpage.html",
+            message=message,
+            sql_query=sql_query,
+            query_result=query_result,
+            natural_language_result=natural_language_result,
+        )
 
-    # Pass the message to data.py and get the result
-    # result = data.process_message(message)  # Capture the result from process_message
-
-    # Return the result to the user (or send it to a different template for rendering)
-    # return f"Message received: {message} <br> Query Result: {result}"
-
+    except Exception as e:
+        # In case of an error, render an error message
+        return render_template("webpage.html", message=message, sql_query="Error", query_result="Error", natural_language_result=f"Error: {e}")
 
 if __name__ == "__main__":
     app.run(debug=True)
