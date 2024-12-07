@@ -1,14 +1,19 @@
 import mysql.connector
+from dotenv import load_dotenv
+import os
 
+# Load environment variables
+load_dotenv()
 connection = None  # Define connection variable outside the try block
 
 try:
     # Attempt to connect to the database
     connection = mysql.connector.connect(
-        host="inventorycheck.cnwm886wwadv.us-east-1.rds.amazonaws.com",
-        user="admin",
-        password="afaglucy101",
-    )
+    host=os.getenv("DB_HOST"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    #database=os.getenv("DB_NAME")
+)
 
     if connection.is_connected():
         print(connection)
@@ -32,3 +37,5 @@ finally:
     if connection and connection.is_connected():
         connection.close()
         print("Database connection closed.")
+
+
