@@ -2,6 +2,83 @@
 <html>
 <head>
     <title>Simple Calculator</title>
+    <style>
+        /* Set the background color to white */
+        body {
+            background-color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style the button with black color */
+        button {
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Change the button style when hovered */
+        button:hover {
+            background-color: #333;
+        }
+
+        /* Style the textbox with a light yellow color */
+        textarea {
+            background-color: #fff9c4; /* Light yellow */
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-size: 14px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Add some margin and padding for better spacing */
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Style the results section */
+        .results {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .results h2 {
+            text-align: center;
+        }
+
+        .results p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .results strong {
+            color: #333;
+        }
+
+        /* Smaller text for SQL query and result */
+        .small-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 20px;
+        }
+
+    </style>
 </head>
 <body>
     <h1>How Can I Help You?</h1>
@@ -10,5 +87,21 @@
         <textarea id="chatMessage" name="chatMessage" rows="4" cols="50" required></textarea><br><br>
         <button type="submit">Submit Message</button>
     </form>
+
+    <!-- Display results if they exist -->
+    {% if message %}
+        <div class="results">
+            <h2>Results:</h2>
+            <p><strong>I received this question:</strong> {{ message }}</p>
+            <p><strong>Based on my query,</strong> {{ natural_language_result }}</p>
+        </div>
+
+        <!-- Display SQL query and query result in smaller text -->
+        <div class="small-text">
+            <p><strong>For your reference:</strong></p>
+            <p><strong>SQL Query:</strong> {{ sql_query }}</p>
+            <p><strong>Query Result:</strong> {{ query_result }}</p>
+        </div>
+    {% endif %}
 </body>
 </html>
