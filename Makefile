@@ -19,6 +19,10 @@ format:
 lint:
 	ruff check backend/*.py
 
+# Lint Dockerfile
+container-lint:
+	docker run --rm -i hadolint/hadolint < backend/Dockerfile
+
 # Build the Docker image
 build:
 	docker build -t $(IMAGE_NAME) .
@@ -51,3 +55,29 @@ login:
 
 # Default target: Run all tasks
 all: install lint test format build push
+
+# Deploy to AWS AppRunner
+deploy-app-runner:
+	@echo "Deploying to AWS AppRunner..."
+	@make build
+	@make push
+	@echo "Deployment to AWS AppRunner completed."
+
+# Deploy to RDS (for RDS-specific steps)
+deploy-rds:
+	@echo "Deploying RDS with CloudFormation..."
+	@aws cloudformation deploy \
+		--template-file rds-cloudformation-template.yml \
+		--stack-name rds-stack \
+		--parameter-overrides \
+			VPCId=${VPC_ID} \
+			SubnetIds=${SUBNET_IDS} \
+		--capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM
+	@echo "RDS deployment completed."
+
+# Deploy all services (AppRunner + RDS)
+deploy-all: deploy-app-runner deploy-rds
+	@echo "All services deployed."
+
+# Default target: Run all tasks
+all: install lint test format build push deploy-all
