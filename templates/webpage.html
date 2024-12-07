@@ -67,7 +67,26 @@
             padding: 20px;
             background-color: #f1f1f1;
             border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 15px;
+            position: relative;
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Add the "tail" for the bubble */
+        .results::after {
+            content: '';
+            position: absolute;
+            bottom: -15px; /* Position the tail */
+            left: 50%; /* Center the tail */
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 15px 15px 0 15px; /* Adjust the triangle size */
+            border-color: #f1f1f1 transparent transparent transparent; /* Match bubble color */
         }
 
         .results h2 {
