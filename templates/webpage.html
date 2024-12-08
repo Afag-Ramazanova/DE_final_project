@@ -38,7 +38,7 @@
         }
 
         textarea {
-            background-color: #fcf8e8;
+            background-color: #ffffff; 
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 10px;
@@ -67,7 +67,7 @@
         .results {
             margin-top: 30px;
             padding: 20px;
-            background-color: #f1f1f1;
+            background-color: #ffffff;
             border: 1px solid #ddd;
             border-radius: 15px;
             position: relative;
@@ -82,14 +82,27 @@
         .results::after {
             content: '';
             position: absolute;
-            bottom: -20px; /* Position the tail */
+            bottom: -20px; /* Position the tail slightly lower */
             left: 30px;
-            transform: none
             width: 0;
             height: 0;
             border-style: solid;
-            border-width: 20px 20px 0 20px;  /* Adjust the triangle size */
-            border-color: #f1f1f1 transparent transparent transparent; /* Match bubble color */
+            border-width: 20px 20px 0 20px; /* Triangle size */
+            border-color: #ffffff transparent transparent transparent; /* Match bubble color */
+            z-index: 2; /* Ensure it sits above the shadow */
+        }
+        
+        .results::before {
+            content: '';
+            position: absolute;
+            bottom: -23px; /* Slightly lower than the white tail */
+            left: 28px; /* Offset slightly for alignment */
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 22px 22px 0 22px; /* Slightly larger than the white tail */
+            border-color: rgba(0, 0, 0, 0.1) transparent transparent transparent; /* Shadow color */
+            z-index: 1; /* Place it behind the white tail */
         }
 
         .results h2 {
@@ -114,10 +127,21 @@
             left: 50%; /* Start centering horizontally */
             transform: translateX(-50%); /* Complete horizontal centering */
             text-align: center;
-            background-color: rgba(255, 255, 255, 0.9); /* Optional: background for readability */
+            background-color: #ffffff;
             padding: 5px 10px; /* Optional: add padding */
             border-radius: 8px; /* Optional: round the edges */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: slight shadow */
+        }
+
+        .logo {
+            text-align: center; /* Center the logo */
+            margin-top: 30px; /* Add spacing from the top */
+        }
+        
+        .logo img {
+            max-width: 300px; /* Adjust to control the size of the logo */
+            height: auto; /* Maintain aspect ratio */
+            display: inline-block; /* Ensure it behaves like text */
         }
 
         .icon {
@@ -134,7 +158,9 @@
     </style>
 </head>
 <body>
-    <h1>How Can I Help You?</h1>
+    <div class="logo">
+        <img src="static/images/logo_new.png" alt="Logo">
+    </div>
     <form action="/analyze" method="post">
         <label for="chatMessage">Type your question about our inventory:</label><br>
         <textarea id="chatMessage" name="chatMessage" rows="4" cols="50" required></textarea><br><br>
