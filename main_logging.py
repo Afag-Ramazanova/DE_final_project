@@ -1,6 +1,5 @@
 import logging
 from flask import Flask, render_template, request
-import csv
 from datetime import datetime
 from lib.llm import convert_to_sql, execute_sql_query, generate_combined_response
 
@@ -9,10 +8,10 @@ app = Flask(__name__)
 # Set up logging
 logging.basicConfig(
     level=logging.DEBUG,
-    format="%(asctime)s [%(levelname)s] %(message)s",  # Log format
+    format="%(asctime)s [%(levelname)s] %(message)s",  # Should log message and timestamp
     handlers=[
         logging.StreamHandler(),  # Output to stdout (Gunicorn will capture this)
-        logging.FileHandler("app.log")  # Log to a file
+        logging.FileHandler("app.log")
     ]
 )
 
@@ -37,12 +36,9 @@ def analyze():
     print(f"Received message: {message}")
     logger.info(f"Received message: {message}")
 
-    # Log the message with the timestamp in message.csv
+    # Log the message with the timestamp (no longer using CSV, just logging)
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    with open("message.csv", "a", newline="") as file:
-        writer = csv.writer(file)
-        writer.writerow([message, timestamp])
-    logger.info(f"Logged message at {timestamp}")
+    logger.info(f"Message logged at {timestamp}")
 
     try:
         # Step 1: Convert the message to an SQL query using LLM

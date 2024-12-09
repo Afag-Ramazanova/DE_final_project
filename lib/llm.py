@@ -23,7 +23,7 @@ def convert_to_sql(user_prompt):
         f"discount_price, actual_price). "
         "All string columns (name, main_category, sub_category) need to be UPPERCASEd. "
         "If calculating the standard deviation, use the formula to approximate it. "
-        f"Convert the following natural language query into a SQL query: {user_prompt}"
+        f"Convert the following natural language query into a MySQL query: {user_prompt}"
     )
 
     # Format the request payload for the LLM
@@ -202,7 +202,7 @@ def validate_sql_query(sql_query):
 
 
 def main():
-    user_prompt = "How many products have a rating higher than 4.5?"
+    user_prompt = "How many items in the 'Car Electronics' sub-category have a rating greater than 4.0?"
     try:
         user_prompt = user_prompt.upper()  # Ensure case consistency
         sql_query = convert_to_sql(user_prompt)
