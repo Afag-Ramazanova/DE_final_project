@@ -12,3 +12,6 @@ class UserBehavior(TaskSet):
 class LoadTestUser(HttpUser):
     tasks = [UserBehavior]
     wait_time = between(1, 3)  # Wait between 1 to 3 seconds between tasks
+
+
+
