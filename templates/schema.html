@@ -11,6 +11,9 @@
             margin: 0;
             padding: 0;
             color: #333;
+            width: 100%; /* Full width of the page */
+            display: flex;
+            justify-content: center;  /* Centers content horizontally */
         }
 
         .homepage-link {
@@ -35,124 +38,22 @@
             color: #444;
         }
 
-        button {
-            display: block;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: -11px auto -13px; 
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        textarea {
-            background-color: #ffffff; 
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            font-size: 16px;
-            width: 100%;
-            height: 100px;
-            font-family: 'Inter', Arial, sans-serif; /* Use Inter font for textarea */
-            resize: none;
-            box-sizing: border-box;
-        }
-
-        textarea:focus {
-            border-color: #ffffff;
-            outline: none;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-        }
-
-        form {
-            max-width: 500px;
-            margin: 0 auto;
+        .list-container {
+            background-color: white;
             padding: 20px;
-            text-align: center;
-            margin-bottom: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* Style the results section */
-        .results {
-            margin-top: 5px;
-            padding: 20px;
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 15px;
-            position: relative;
-            max-width: 90%; /* Extend across the page */
-            margin-left: auto;
-            margin-right: auto;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            font-family: 'Inter', Arial, sans-serif; 
-            margin-bottom: 10px;
-            color: #666;
-            overflow-y: scroll;
+        ul {
+            list-style-type: none; /* Remove default bullet points */
+            padding: 0;
+            margin: 0;
         }
 
-        /* Add the "tail" for the bubble */
-        .results::after {
-            content: '';
-            position: absolute;
-            bottom: -20px; /* Position the tail slightly lower */
-            left: 30px;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 20px 20px 0 20px; /* Triangle size */
-            border-color: #ffffff transparent transparent transparent; /* Match bubble color */
-            z-index: 2; /* Ensure it sits above the shadow */
-        }
-        
-        /* Shadow of the tail */
-        .results::before {
-            content: '';
-            position: absolute;
-            bottom: -23px; /* Slightly lower than the white tail */
-            left: 28px; /* Offset slightly for alignment */
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 22px 22px 0 22px; /* Slightly larger than the white tail */
-            border-color: rgba(0, 0, 0, 0.1) transparent transparent transparent; /* Shadow color */
-            z-index: 1; /* Place it behind the white tail */
-        }
-
-        .results h2 {
-            text-align: center;
-        }
-
-        .results p {
+        li {
             margin: 10px 0;
             font-size: 16px;
-        }
-
-        .results strong {
-            color: #333;
-        }
-
-        /* Smaller text for SQL query and result */
-        .small-text {
-            font-size: 12px;
-            color: #666;
-            position: relative;
-            bottom: 10px; /* Adjust the vertical spacing */
-            left: 50%; /* Start centering horizontally */
-            transform: translateX(-50%); /* Complete horizontal centering */
-            text-align: center;
-            background-color: #e7e4e4;
-            padding: 5px 10px; /* Optional: add padding */
-            border-radius: 8px; /* Optional: round the edges */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: slight shadow */
-            width: fit-content;
         }
 
         .logo {
@@ -186,20 +87,22 @@
     </div> 
     <h1>Here's what our inventory looks like:</h1>
 
-    <ul>
-        <li>Product name</li>
-        <li>Product category (examples include Car Electronics, Women's Clothing, Accessories, and Appliances) </li>
+    <div class="list-container">
         <ul>
-            <li>For a full list of categories, please ask our bot!</li>
+            <li>Product name</li>
+            <li>Product category (examples include Car Electronics, Women's Clothing, Accessories, and Appliances)</li>
+            <ul>
+                <li>For a full list of categories, please ask our bot!</li>
+            </ul>
+            <li>Product subcategory</li>
+            <li>Average rating</li>
+            <li>Number of ratings</li>
+            <li>Discounted price in MRP</li>
+            <li>Actual price in MRP</li>
         </ul>
-        <li>Product subcategory</li>
-        <li>Average rating</li>
-        <li>Number of ratings</li>
-        <li>Discounted price in MRP</li>
-        <li>Actual price in MRP</li>
-    </ul>
+    </div>
 
-    <a href="/" "class=homepage-link">Home</a>
+    <a href="/" class="homepage-link">Home</a>
 
 </body>
 </html>
