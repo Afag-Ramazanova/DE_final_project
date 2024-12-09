@@ -22,11 +22,12 @@ EXPOSE 5000
 # the flask command where the application is located
 
 #without this the flask run command will not know what app to run.
-ENV FLASK_APP=main.py
+ENV FLASK_APP=main_logging.py
 
 # Run app.py when the container launches
 # 0.0.0.0 sets the application to listen on all network interfaces
 
 #a more secure option would be to specify the exact IP you plan to use 
 # (e.g.API gateway interface)
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "--access-logfile", "-", "--error-logfile", "-", "main_logging:app"]
+#CMD ["flask", "run", "--host=0.0.0.0"]
