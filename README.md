@@ -25,6 +25,12 @@ This project is a **microservice solution** designed to empower businesses to in
 - **CI/CD Integration**: Automated pipeline for dependency installation, code linting, formatting, testing, and deployment.
 - **Infrastructure as Code**: Fully deployed using AWS CloudFormation for infrastructure setup and management.
 
+## How It Works
+1. The user inputs a natural language question via the web interface.
+2. The app sends the question to **Anthropic Claude 3.5** through AWS Bedrock.
+3. The AI generates an SQL query tailored to the question.
+4. The SQL query is executed on the **AWS RDS** database.
+5. The results are converted back to natural language and displayed to the user.
 
 ## Use Case
 This microservice is designed for **business (inventory) users** who need actionable insights from their databases but lack SQL expertise. For this implementation, the database is an **Amazon inventory database**, containing the following columns:
@@ -113,13 +119,6 @@ The system has been load-tested to handle 10,000 requests per second. Key metric
 ## Demo Video
 
 A video walkthrough demonstrating the application, including load testing and performance metrics, can be found here.
-
-## How It Works
-1. The user inputs a natural language question via the web interface.
-2. The app sends the question to **Anthropic Claude 3.5** through AWS Bedrock.
-3. The AI generates an SQL query tailored to the question.
-4. The SQL query is executed on the **AWS RDS** database.
-5. The results are converted back to natural language and displayed to the user.
 
 ## Future Enhancements
 - Support for additional databases.
