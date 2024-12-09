@@ -10,6 +10,7 @@ nbval
 # Web App
 flask
 pymysql
+python-dotenv
 
 # AWS
 boto3
