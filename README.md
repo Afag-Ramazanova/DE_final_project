@@ -1,35 +1,35 @@
 Check CI/CD Status: 
 
-[![Install Dependencies](https://github.com/nogibjj/Final_project_Inventory/actions/workflows/install.yml/badge.svg)](https://github.com/nogibjj/Final_project_Inventory/actions/workflows/install.yml)
-
-[![Lint Code](https://github.com/nogibjj/Final_project_Inventory/actions/workflows/lint.yml/badge.svg)](https://github.com/nogibjj/Final_project_Inventory/actions/workflows/lint.yml)
-
-[![Format Code](https://github.com/nogibjj/Final_project_Inventory/actions/workflows/format.yml/badge.svg)](https://github.com/nogibjj/Final_project_Inventory/actions/workflows/format.yml)
-
-[![Test Code](https://github.com/nogibjj/Final_project_Inventory/actions/workflows/test.yml/badge.svg)](https://github.com/nogibjj/Final_project_Inventory/actions/workflows/test.yml)
-
-[![Load Data to RDS](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/load_data.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/load_data.yml)
-
-[![Deploy App to AWS AppRunner](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/ecr.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/ecr.yml)
-
-[![Deploy RDS with CloudFormation](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/deploy_rds.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/deploy_rds.yml)
+[![Install Dependencies](https://github.com/nogibjj/Final_project_Inventory/actions/workflows/install.yml/badge.svg)](https://github.com/nogibjj/Final_project_Inventory/actions/workflows/install.yml) [![Lint Code](https://github.com/nogibjj/Final_project_Inventory/actions/workflows/lint.yml/badge.svg)](https://github.com/nogibjj/Final_project_Inventory/actions/workflows/lint.yml) [![Format Code](https://github.com/nogibjj/Final_project_Inventory/actions/workflows/format.yml/badge.svg)](https://github.com/nogibjj/Final_project_Inventory/actions/workflows/format.yml) [![Test Code](https://github.com/nogibjj/Final_project_Inventory/actions/workflows/test.yml/badge.svg)](https://github.com/nogibjj/Final_project_Inventory/actions/workflows/test.yml) [![Deploy App to AWS AppRunner](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/ecr.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/ecr.yml) [![Deploy RDS with CloudFormation](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/deploy_rds.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/deploy_rds.yml)
 
 
-# Natural Language to SQL Microservice
+# AskSQl Natural Language to SQL Microservice
+<img src="static/images/logo_new.png" alt="logo" width="400" height="150"> 
+
+#### Contributors:
+[Afag Ramazanova](https://github.com/Afag-Ramazanova),
+[Loo Si Min (Lucy)](https://github.com/loosimin16),
+[Rishika Randev](https://github.com/rrandev03),
+[Seijung Kim](https://github.com/seij001),
+[Tursunai Turumbekova](https://github.com/tursunait)
 
 ## Overview
-This project is a **microservice solution** designed to empower businesses to interact with their databases using **natural language questions**, removing the need for SQL expertise. It is a robust and scalable application that leverages AWS services and cutting-edge AI to convert human-readable queries into SQL commands, retrieve data from the database, and respond with answers in natural language.
+This project is a **microservice solution** designed to empower businesses to interact with their Invenroty database on AWS RDS using **natural language questions**, removing the need for SQL expertise. It is a robust and scalable application that leverages AWS services and cutting-edge AI to convert human-readable queries into SQL commands, retrieve data from the database, and respond with answers in natural language. It leverages AWS services and AI-powered tools to deliver an efficient, cloud-native experience.
 
 ### Key Features:
+- **Microservice Architecture**: Built as a standalone, containerized microservice using a Docker image.
 - **User-friendly Interface**: A simple web application for inputting natural language questions.
 - **AI-Powered SQL Conversion**: Utilizes **Anthropic Claude 3.5** through AWS Bedrock to convert questions into SQL queries.
 - **Database Interaction**: Queries data from an **AWS RDS** database.
 - **Natural Language Responses**: Returns the results in natural language, displayed on the web page.
 - **Cloud-Native Deployment**: Hosted on AWS using **AppRunner**, with container images stored in **ECR**.
+- **Performance Validated**: Load-tested to handle 10,000 requests per second.
 - **CI/CD Integration**: Automated pipeline for dependency installation, code linting, formatting, testing, and deployment.
+- **Infrastructure as Code**: Fully deployed using AWS CloudFormation for infrastructure setup and management.
+
 
 ## Use Case
-This microservice is designed for **business users** who need actionable insights from their databases but lack SQL expertise. For this implementation, the database is an **Amazon inventory database**, containing the following columns:
+This microservice is designed for **business (inventory) users** who need actionable insights from their databases but lack SQL expertise. For this implementation, the database is an **Amazon inventory database**, containing the following columns:
 - `name`
 - `main_category`
 - `sub_category`
@@ -38,9 +38,11 @@ This microservice is designed for **business users** who need actionable insight
 - `discount_price`
 - `actual_price`
 
+This application is ideal for: retail inventory analysis, sales trend exploration, product category performance evaluation, etc. 
+
 ### Example Queries:
-- "What are the top-rated products in the electronics category?"
-- "List all products in the furniture category with discounts greater than 20%."
+- "Can you find all items with Bluetooth in their name?"
+- "Could you show me the names and discount prices of all items in the Car Electronics sub-category"
 - "How many products have a rating higher than 4.5?"
 
 ## Architecture
@@ -51,7 +53,10 @@ The application architecture is built entirely on AWS, ensuring scalability, rel
 4. **Response Handling**: Results are translated back into natural language and displayed on the web interface.
 5. **Deployment**: The application is containerized and deployed on **AWS AppRunner**, pulling images from **AWS ECR**.
 
+![Architecture](static/images/IDS706_Final_Architecture.png)
+
 ## Technology Stack
+- **Backend**: Flask (Python)
 - **Programming Language**: Python
 - **Framework**: Flask
 - **AI Model**: Anthropic Claude 3.5 (via AWS Bedrock)
@@ -60,6 +65,9 @@ The application architecture is built entirely on AWS, ensuring scalability, rel
   - AWS AppRunner
   - AWS Elastic Container Registry (ECR)
   - AWS Bedrock
+  - AWS CloudFormation (IaC)
+- **Load Testing**: Validated with a tool to ensure 10,000 requests per second.
+
 - **CI/CD Pipeline**:
   - Install dependencies
   - Lint and format code
@@ -94,6 +102,16 @@ The project includes a CI/CD pipeline for streamlined development and deployment
 4. **Test Code**: Runs automated tests to validate functionality.
 5. **Deploy**: Builds and pushes the Docker image to ECR. AppRunner service is set up to automatically re-deploy the app when a new container image is pushed to ECR repository.
 
+## Quantitative Assessment
+
+The system has been load-tested to handle 10,000 requests per second. Key metrics include:
+- **Average Latency**: Measured across various request loads (100, 1,000, 10,000).
+- **Error Rates**: Maintained under acceptable thresholds during testing.
+
+## Demo Video
+
+A video walkthrough demonstrating the application, including load testing and performance metrics, can be found here.
+
 ## How It Works
 1. The user inputs a natural language question via the web interface.
 2. The app sends the question to **Anthropic Claude 3.5** through AWS Bedrock.
@@ -106,8 +124,5 @@ The project includes a CI/CD pipeline for streamlined development and deployment
 - Enhanced natural language understanding for complex queries.
 - Advanced visualization options for query results.
 
-## Contact
-For questions or contributions, please contact:
-**Project Maintainer**: [Your Name]  
-**Email**: [Your Email]  
-**GitHub**: [Your GitHub Profile]
+
+Thank you!

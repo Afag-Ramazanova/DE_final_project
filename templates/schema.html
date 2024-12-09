@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ask SQL</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        body {
+            background-color: #e8f1f8;
+            font-family: 'Inter', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            width: 100%; /* Full width of the page */
+            display: flex;
+            justify-content: center;  /* Centers content horizontally */
+        }
+
+        .homepage-link {
+            position: fixed;
+            top: 10px;    
+            right: 10px;  
+            text-decoration: none; 
+            font-size: 16px;       
+            padding: 5px 10px;      
+            background-color: #007bff; 
+            color: #333;
+            border-radius: 5px;    /* Rounded corners */
+        }
+        
+        .homepage-link:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #444;
+        }
+
+        .list-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        ul {
+            list-style-type: none; /* Remove default bullet points */
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .logo {
+            text-align: center; /* Center the logo */
+            margin-top: 30px; /* Add spacing from the top */
+        }
+        
+        .logo img {
+            max-width: 300px; /* Adjust to control the size of the logo */
+            height: auto; /* Maintain aspect ratio */
+            display: inline-block; /* Ensure it behaves like text */
+        }
+
+        .icon {
+            position: relative;
+            bottom: 12px;
+            left: 20px;
+            margin-top: 30px;
+        }
+
+        .icon img {
+            width: 100px;
+            height: auto;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="static/images/logo_new.png" alt="Logo">
+    </div> 
+    <h1>Here's what our inventory looks like:</h1>
+
+    <div class="list-container">
+        <ul>
+            <li>Product name</li>
+            <li>Product category (examples include Car Electronics, Women's Clothing, Accessories, and Appliances)</li>
+            <ul>
+                <li>For a full list of categories, please ask our bot!</li>
+            </ul>
+            <li>Product subcategory</li>
+            <li>Average rating</li>
+            <li>Number of ratings</li>
+            <li>Discounted price in MRP</li>
+            <li>Actual price in MRP</li>
+        </ul>
+    </div>
+
+    <a href="/" class="homepage-link">Home</a>
+
+</body>
+</html>

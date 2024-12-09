@@ -2,19 +2,25 @@ import sqlite3
 import boto3
 import json
 from botocore.exceptions import ClientError
+import os
+import pymysql
+from dotenv import load_dotenv
 
-# Path to your SQLite database
-db_path = "/Users/tusunaiturumbekova/DE_final_project/data/products.db"
 
+load_dotenv()
 # Create a Bedrock Runtime client
 client = boto3.client("bedrock-runtime", region_name="us-west-2")
 
 
 def convert_to_sql(user_prompt):
+    # Retrieve table name from environment
+    table_name = os.getenv("table_name", "items")
+
     # Updated prompt with schema details
     prompt = (
-        "The database has the following schema: "
-        "products(name, main_category, sub_category, ratings, no_of_ratings, discount_price, actual_price). "
+        f"The database has the following schema: "
+        f"{table_name}(name, main_category, sub_category, ratings, no_of_ratings, "
+        f"discount_price, actual_price). "
         "All string columns (name, main_category, sub_category) need to be UPPERCASEd. "
         "If calculating the standard deviation, use the formula to approximate it. "
         f"Convert the following natural language query into a SQL query: {user_prompt}"
@@ -75,16 +81,23 @@ def convert_to_sql(user_prompt):
 
 def execute_sql_query(sql_query):
     try:
-        conn = sqlite3.connect(db_path)
-        cursor = conn.cursor()
-        cursor.execute(sql_query)
-        result = cursor.fetchall()
-        conn.close()
+        # Connect to the AWS RDS database
+        connection = pymysql.connect(
+            host=os.getenv("DB_HOST"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD"),
+            database=os.getenv("DB_NAME"),
+        )
+
+        with connection.cursor() as cursor:
+            cursor.execute(sql_query)
+            result = cursor.fetchall()
+
+        connection.close()
         return result
-    except sqlite3.OperationalError as e:
-        raise Exception(f"SQLite Operational Error: {e}")
-    except sqlite3.DatabaseError as e:
-        raise Exception(f"SQLite Database Error: {e}")
+
+    except pymysql.MySQLError as e:
+        raise Exception(f"MySQL Error: {e}")
     except Exception as e:
         raise Exception(f"Unexpected Error: {e}")
 
@@ -189,9 +202,7 @@ def validate_sql_query(sql_query):
 
 
 def main():
-    user_prompt = (
-        "What are the top 3 most expensive items in the 'Car Electronics' sub-category?"
-    )
+    user_prompt = "How many products have a rating higher than 4.5?"
     try:
         user_prompt = user_prompt.upper()  # Ensure case consistency
         sql_query = convert_to_sql(user_prompt)

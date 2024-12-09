@@ -3,13 +3,30 @@
 <head>
     <title>Ask SQL</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
         /* Set the background color to white */
         body {
-            background-color: #f9fafb;
-            font-family: Arial, sans-serif;
+            background-color: #e8f1f8;
+            font-family: 'Inter', Arial, sans-serif;
             margin: 0;
             padding: 0;
             color: #333;
+        }
+
+        .schema-link {
+            position: fixed;
+            top: 10px;    
+            right: 10px;  
+            text-decoration: none; 
+            font-size: 16px;       
+            padding: 5px 10px;      
+            background-color: #007bff; 
+            color: #007bff;
+            border-radius: 5px;    /* Rounded corners */
+        }
+        
+        .schema-link:hover {
+            background-color: #0056b3; /* Darker shade on hover */
         }
 
         h1 {
@@ -28,7 +45,7 @@
             font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
-            margin: 20px auto 0;
+            margin: -11px auto -13px; 
             transition: background-color 0.3s ease;
         }
 
@@ -37,19 +54,20 @@
         }
 
         textarea {
-            background-color: #fcf8e8;
+            background-color: #ffffff; 
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 10px;
             font-size: 16px;
             width: 100%;
             height: 100px;
+            font-family: 'Inter', Arial, sans-serif; /* Use Inter font for textarea */
             resize: none;
             box-sizing: border-box;
         }
 
         textarea:focus {
-            border-color: #007bff;
+            border-color: #ffffff;
             outline: none;
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
         }
@@ -59,34 +77,53 @@
             margin: 0 auto;
             padding: 20px;
             text-align: center;
+            margin-bottom: 40px;
         }
 
         /* Style the results section */
         .results {
-            margin-top: 30px;
+            margin-top: 5px;
             padding: 20px;
-            background-color: #f1f1f1;
+            background-color: #ffffff;
             border: 1px solid #ddd;
             border-radius: 15px;
             position: relative;
-            max-width: 80%;
+            max-width: 90%; /* Extend across the page */
             margin-left: auto;
             margin-right: auto;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-family: 'Inter', Arial, sans-serif; 
+            margin-bottom: 10px;
+            color: #666;
+            overflow-y: scroll;
         }
 
         /* Add the "tail" for the bubble */
         .results::after {
             content: '';
             position: absolute;
-            bottom: -15px; /* Position the tail */
-            left: 50%; /* Center the tail */
-            transform: translateX(-50%);
+            bottom: -20px; /* Position the tail slightly lower */
+            left: 30px;
             width: 0;
             height: 0;
             border-style: solid;
-            border-width: 15px 15px 0 15px; /* Adjust the triangle size */
-            border-color: #f1f1f1 transparent transparent transparent; /* Match bubble color */
+            border-width: 20px 20px 0 20px; /* Triangle size */
+            border-color: #ffffff transparent transparent transparent; /* Match bubble color */
+            z-index: 2; /* Ensure it sits above the shadow */
+        }
+        
+        /* Shadow of the tail */
+        .results::before {
+            content: '';
+            position: absolute;
+            bottom: -23px; /* Slightly lower than the white tail */
+            left: 28px; /* Offset slightly for alignment */
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 22px 22px 0 22px; /* Slightly larger than the white tail */
+            border-color: rgba(0, 0, 0, 0.1) transparent transparent transparent; /* Shadow color */
+            z-index: 1; /* Place it behind the white tail */
         }
 
         .results h2 {
@@ -106,33 +143,75 @@
         .small-text {
             font-size: 12px;
             color: #666;
-            margin-top: 20px;
+            position: relative;
+            bottom: 10px; /* Adjust the vertical spacing */
+            left: 50%; /* Start centering horizontally */
+            transform: translateX(-50%); /* Complete horizontal centering */
+            text-align: center;
+            background-color: #e7e4e4;
+            padding: 5px 10px; /* Optional: add padding */
+            border-radius: 8px; /* Optional: round the edges */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: slight shadow */
+            width: fit-content;
+        }
+
+        .logo {
+            text-align: center; /* Center the logo */
+            margin-top: 30px; /* Add spacing from the top */
+        }
+        
+        .logo img {
+            max-width: 300px; /* Adjust to control the size of the logo */
+            height: auto; /* Maintain aspect ratio */
+            display: inline-block; /* Ensure it behaves like text */
+        }
+
+        .icon {
+            position: relative;
+            bottom: 12px;
+            left: 20px;
+            margin-top: 30px;
+        }
+
+        .icon img {
+            width: 100px;
+            height: auto;
         }
 
     </style>
 </head>
 <body>
-    <h1>How Can I Help You?</h1>
+    <div class="logo">
+        <img src="static/images/logo_new.png" alt="Logo">
+    </div>
     <form action="/analyze" method="post">
-        <label for="chatMessage">Type your message:</label><br>
+        <label for="chatMessage">Type your question about our inventory:</label><br>
         <textarea id="chatMessage" name="chatMessage" rows="4" cols="50" required></textarea><br><br>
-        <button type="submit">Submit Message</button>
+        <button type="submit">Submit</button>
     </form>
 
     <!-- Display results if they exist -->
     {% if message %}
         <div class="results">
-            <h2>Results:</h2>
+            <h2>Hello, happy to help!</h2>
             <p><strong>I received this question:</strong> {{ message }}</p>
             <p><strong>Based on my query,</strong> {{ natural_language_result }}</p>
         </div>
-
+        <div class="icon">
+            <img src="static/images/happy.png" alt="Chatbot Icon">
+        </div>
         <!-- Display SQL query and query result in smaller text -->
         <div class="small-text">
             <p><strong>For your reference:</strong></p>
             <p><strong>SQL Query:</strong> {{ sql_query }}</p>
             <p><strong>Query Result:</strong> {{ query_result }}</p>
         </div>
+
+    {% else %}
+    <div class="icon">
+        <img src="static/images/happy.png" alt="Chatbot Icon">
+    </div>
     {% endif %}
+    <a href="/schema" class="schema-link">See Our Inventory</a>
 </body>
 </html>
