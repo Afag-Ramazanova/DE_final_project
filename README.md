@@ -106,6 +106,10 @@ The system has been load-tested to handle 10,000 requests per second. Key metric
 - **Average Latency**: Measured across various request loads (100, 1,000, 10,000).
 - **Error Rates**: Maintained under acceptable thresholds during testing.
 
+- The detailed assessment is accessible here: [PDF](quant_assessment/Locustfinal.pdf), [CSV](quant_assessment/Locust_2024-12-09-13h05_load_test.py_https___zztaz2qbqh.us-east-2.awsapprunner.com_requests.csv)
+
+![request](quant_assessment/request_stats.png)
+
 ## Demo Video
 
 A video walkthrough demonstrating the application, including load testing and performance metrics, can be found here.
