@@ -116,7 +116,12 @@ The system has been load-tested to handle 10,000 requests per second. Key metric
 
 - The detailed assessment is accessible here: [PDF](quant_assessment/Locustfinal.pdf), [CSV](quant_assessment/Locust_2024-12-09-13h05_load_test.py_https___zztaz2qbqh.us-east-2.awsapprunner.com_requests.csv)
 
+Statistics:
 ![request](quant_assessment/request_stats.png)
+
+Visual Representation:
+![graph](quant_assessment\requests_graph.png)
+
 
 ## Demo Video
 
