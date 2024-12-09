@@ -11,23 +11,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the repository code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: 3.8
 
-      # Step 3: Install dependencies
       - name: Install dependencies
         run: |
+          python -m venv venv
+          source venv/bin/activate
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Step 4: Run tests with pytest
-      - name: Run Tests
+      - name: Run Tests (pytest)
         run: |
-          pytest --maxfail=1 --disable-warnings -q
+          source venv/bin/activate
+          make test  # Run the test task from Makefile

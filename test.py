@@ -53,8 +53,8 @@ prompts = [
     "What is the average discount price for each sub-category within the 'Car & Motorbike' main category?",
     "What is the total discount price for items in the 'Nonexistent' sub-category?",
     "Find all items where the name contains the word 'Bluetooth'.",
-    #"What is the standard deviation of the discount price for items in the 'Car Electronics' sub-category?",
-    "Show me the names and discount prices of items in the 'Car Electronics' sub-category."
+    # "What is the standard deviation of the discount price for items in the 'Car Electronics' sub-category?",
+    "Show me the names and discount prices of items in the 'Car Electronics' sub-category.",
 ]
 
 # Test function to check the SQL query execution
@@ -66,7 +66,7 @@ def test_llm_with_db(prompt):
     # Check if the query is valid and add alias to subqueries if missing
     if "FROM (" in sql_query and "AS" not in sql_query.split("FROM")[-1]:
         # Fix: Add alias directly after the closing parenthesis of the subquery
-        sql_query = sql_query.rstrip(')') + " AS subquery)"
+        sql_query = sql_query.rstrip(")") + " AS subquery)"
 
     # Assert that the generated SQL query is not empty
     assert sql_query != "", f"Generated SQL query for prompt '{prompt}' is empty."
@@ -83,5 +83,7 @@ def test_llm_with_db(prompt):
     natural_language_result = generate_combined_response(prompt, query_result)
 
     # Ensure that the response does not contain "Error" or is not empty
-    assert "Error" not in natural_language_result, f"Error found in response for prompt: {prompt}"
+    assert (
+        "Error" not in natural_language_result
+    ), f"Error found in response for prompt: {prompt}"
     assert natural_language_result != "", f"Empty response found for prompt: {prompt}"
