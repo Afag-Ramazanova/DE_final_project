@@ -8,8 +8,6 @@ Check CI/CD Status:
 
 [![Test Code](https://github.com/nogibjj/Final_project_Inventory/actions/workflows/test.yml/badge.svg)](https://github.com/nogibjj/Final_project_Inventory/actions/workflows/test.yml)
 
-[![Load Data to RDS](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/load_data.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/load_data.yml)
-
 [![Deploy App to AWS AppRunner](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/ecr.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/ecr.yml)
 
 [![Deploy RDS with CloudFormation](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/deploy_rds.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/deploy_rds.yml)
