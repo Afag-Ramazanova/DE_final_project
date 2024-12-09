@@ -1,6 +1,6 @@
 import pytest
 import pymysql
-from lib.llm import convert_to_sql, execute_sql_query, generate_combined_response
+from lib.llm import convert_to_sql, generate_combined_response
 from dotenv import load_dotenv
 import os
 
@@ -8,16 +8,16 @@ import os
 load_dotenv()
 
 # Setup the database connection parameters from environment variables
-db_host = os.getenv("DB_HOST")
-db_user = os.getenv("DB_USER")
-db_password = os.getenv("DB_PASSWORD")
-db_name = os.getenv("DB_NAME")
+db_host = os.getenv("RDS_HOST")
+db_user = os.getenv("RDS_USER")
+db_password = os.getenv("RDS_PASSWORD")
+db_name = os.getenv("RDS_NAME")
 
 # Make sure the required environment variables are loaded
-assert db_host, "DB_HOST is not set"
-assert db_user, "DB_USER is not set"
-assert db_password, "DB_PASSWORD is not set"
-assert db_name, "DB_NAME is not set"
+assert db_host, "RDS_HOST is not set"
+assert db_user, "RDS_USER is not set"
+assert db_password, "RDS_PASSWORD is not set"
+assert db_name, "RDS_NAME is not set"
 
 # Setup the database connection using AWS RDS (No SQLite setup needed)
 def execute_sql_query(sql_query):
@@ -53,7 +53,6 @@ prompts = [
     "What is the average discount price for each sub-category within the 'Car & Motorbike' main category?",
     "What is the total discount price for items in the 'Nonexistent' sub-category?",
     "Find all items where the name contains the word 'Bluetooth'.",
-    # "What is the standard deviation of the discount price for items in the 'Car Electronics' sub-category?",
     "Show me the names and discount prices of items in the 'Car Electronics' sub-category.",
 ]
 
