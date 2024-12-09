@@ -120,7 +120,7 @@ Statistics:
 ![request](quant_assessment/request_stats.png)
 
 Visual Representation:
-![graph](quant_assessment\requests_graph.png)
+![graph](quant_assessment/requests_graph.png)
 
 
 ## Demo Video
