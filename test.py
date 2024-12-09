@@ -36,6 +36,7 @@ db_host = os.getenv("RDS_HOST")
 db_user = os.getenv("RDS_USER")
 db_password = os.getenv("RDS_PASSWORD")
 db_name = os.getenv("RDS_NAME")
+table_name = "items"
 
 # Log loaded environment variables (without sensitive data)
 logging.info(f"Loaded DB Host: {db_host}")
@@ -54,7 +55,8 @@ def execute_sql_query(sql_query):
             host=db_host,
             user=db_user,
             password=db_password,
-            database=db_name,
+            database=db_name
+            # table_name = table_name
         )
 
         with connection.cursor() as cursor:
