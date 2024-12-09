@@ -4,7 +4,7 @@ from locust import HttpUser, TaskSet, task, between
 class UserBehavior(TaskSet):
     @task(1)
     def load_test_endpoint(self):
-        self.client.get("/your-endpoint")  # Replace with your API endpoint
+        self.client.get("https://zztaz2qbqh.us-east-2.awsapprunner.com/")  # Replace with your API endpoint
         # Or for a POST request:
         # self.client.post("/your-endpoint", json={"key": "value"})
 
