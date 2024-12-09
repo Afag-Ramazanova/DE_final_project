@@ -66,6 +66,9 @@ jobs:
           echo "RDS_USER=${{ secrets.RDS_USER }}" >> $GITHUB_ENV
           echo "RDS_PASSWORD=${{ secrets.RDS_PASSWORD }}" >> $GITHUB_ENV
           echo "RDS_NAME=${{ secrets.RDS_NAME }}" >> $GITHUB_ENV
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
+          
 
       - name: Run Tests (pytest)
         run: |
