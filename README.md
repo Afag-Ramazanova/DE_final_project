@@ -2,7 +2,9 @@ Check CI/CD Status:
 
 [![Install Dependencies](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/install.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/install.yml) [![Lint Code](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/lint.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/lint.yml) [![Format Code](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/format.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/format.yml) [![Test Code](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/test.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/test.yml) [![Deploy App to AWS AppRunner](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/ecr.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/ecr.yml) [![Deploy RDS with CloudFormation](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/deploy_rds.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/deploy_rds.yml)
 # AskSQl Natural Language to SQL Microservice
-<img src="static/images/logo_new.png" alt="logo" width="400" height="150"> 
+[<img src="static/images/logo_new.png" alt="logo" width="400" height="150">](https://zztaz2qbqh.us-east-2.awsapprunner.com/)
+
+#### Click to access AskSQL ⬆️
 
 #### Contributors:
 [Afag Ramazanova](https://github.com/Afag-Ramazanova),
@@ -25,6 +27,12 @@ This project is a **microservice solution** designed to empower businesses to in
 - **CI/CD Integration**: Automated pipeline for dependency installation, code linting, formatting, testing, and deployment.
 - **Infrastructure as Code**: Fully deployed using AWS CloudFormation for infrastructure setup and management.
 
+## How It Works
+1. The user inputs a natural language question via the web interface.
+2. The app sends the question to **Anthropic Claude 3.5** through AWS Bedrock.
+3. The AI generates an SQL query tailored to the question.
+4. The SQL query is executed on the **AWS RDS** database.
+5. The results are converted back to natural language and displayed to the user.
 
 ## Use Case
 This microservice is designed for **business (inventory) users** who need actionable insights from their databases but lack SQL expertise. For this implementation, the database is an **Amazon inventory database**, containing the following columns:
@@ -106,16 +114,13 @@ The system has been load-tested to handle 10,000 requests per second. Key metric
 - **Average Latency**: Measured across various request loads (100, 1,000, 10,000).
 - **Error Rates**: Maintained under acceptable thresholds during testing.
 
+- The detailed assessment is accessible here: [PDF](quant_assessment/Locustfinal.pdf), [CSV](quant_assessment/Locust_2024-12-09-13h05_load_test.py_https___zztaz2qbqh.us-east-2.awsapprunner.com_requests.csv)
+
+![request](quant_assessment/request_stats.png)
+
 ## Demo Video
 
 A video walkthrough demonstrating the application, including load testing and performance metrics, can be found here.
-
-## How It Works
-1. The user inputs a natural language question via the web interface.
-2. The app sends the question to **Anthropic Claude 3.5** through AWS Bedrock.
-3. The AI generates an SQL query tailored to the question.
-4. The SQL query is executed on the **AWS RDS** database.
-5. The results are converted back to natural language and displayed to the user.
 
 ## Future Enhancements
 - Support for additional databases.
