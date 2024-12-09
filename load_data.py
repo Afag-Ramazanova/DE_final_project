@@ -4,6 +4,9 @@ import csv
 from dotenv import load_dotenv
 import os
 
+
+
+
 # Load environment variables
 load_dotenv()
 
@@ -35,7 +38,6 @@ with open('data/cleaned_amazon_products_dataset.csv', mode='r', encoding='utf-8'
             connection.commit()
             data_batch = []
 
-    # Insert any remaining rows
     if data_batch:
         cursor.executemany("""
             INSERT INTO items (name, main_category, sub_category, ratings, no_of_ratings, discount_price, actual_price)
