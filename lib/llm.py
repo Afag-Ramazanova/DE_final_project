@@ -202,7 +202,7 @@ def validate_sql_query(sql_query):
 
 
 def main():
-    user_prompt = "Find all items where the name contains the word 'Bluetooth'."
+    user_prompt = "How many products have a rating higher than 4.5?"
     try:
         user_prompt = user_prompt.upper()  # Ensure case consistency
         sql_query = convert_to_sql(user_prompt)

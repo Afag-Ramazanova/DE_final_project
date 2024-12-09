@@ -4,7 +4,7 @@
     <title>Ask SQL</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-        /* Set the background color to white */
+
         body {
             background-color: #e8f1f8;
             font-family: 'Inter', Arial, sans-serif;
@@ -13,7 +13,7 @@
             color: #333;
         }
 
-        .schema-link {
+        .homepage-link {
             position: fixed;
             top: 10px;    
             right: 10px;  
@@ -25,7 +25,7 @@
             border-radius: 5px;    /* Rounded corners */
         }
         
-        .schema-link:hover {
+        .homepage-link:hover {
             background-color: #0056b3; /* Darker shade on hover */
         }
 
@@ -183,35 +183,23 @@
 <body>
     <div class="logo">
         <img src="static/images/logo_new.png" alt="Logo">
-    </div>
-    <form action="/analyze" method="post">
-        <label for="chatMessage">Type your question about our inventory:</label><br>
-        <textarea id="chatMessage" name="chatMessage" rows="4" cols="50" required></textarea><br><br>
-        <button type="submit">Submit</button>
-    </form>
+    </div> 
+    <h1>Here's what our inventory looks like:</h1>
 
-    <!-- Display results if they exist -->
-    {% if message %}
-        <div class="results">
-            <h2>Hello, happy to help!</h2>
-            <p><strong>I received this question:</strong> {{ message }}</p>
-            <p><strong>Based on my query,</strong> {{ natural_language_result }}</p>
-        </div>
-        <div class="icon">
-            <img src="static/images/happy.png" alt="Chatbot Icon">
-        </div>
-        <!-- Display SQL query and query result in smaller text -->
-        <div class="small-text">
-            <p><strong>For your reference:</strong></p>
-            <p><strong>SQL Query:</strong> {{ sql_query }}</p>
-            <p><strong>Query Result:</strong> {{ query_result }}</p>
-        </div>
+    <ul>
+        <li>Product name</li>
+        <li>Product category (examples include Car Electronics, Women's Clothing, Accessories, and Appliances) </li>
+        <ul>
+            <li>For a full list of categories, please ask our bot!</li>
+        </ul>
+        <li>Product subcategory</li>
+        <li>Average rating</li>
+        <li>Number of ratings</li>
+        <li>Discounted price in MRP</li>
+        <li>Actual price in MRP</li>
+    </ul>
 
-    {% else %}
-    <div class="icon">
-        <img src="static/images/happy.png" alt="Chatbot Icon">
-    </div>
-    {% endif %}
-    <a href="/schema" "class=schema-link">See Our Inventory</a>
+    <a href="/" "class=homepage-link">Home</a>
+
 </body>
 </html>
