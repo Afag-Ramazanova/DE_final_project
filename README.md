@@ -8,8 +8,6 @@ Check CI/CD Status:
 
 [![Test Code](https://github.com/nogibjj/Final_project_Inventory/actions/workflows/test.yml/badge.svg)](https://github.com/nogibjj/Final_project_Inventory/actions/workflows/test.yml)
 
-[![Load Data to RDS](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/load_data.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/load_data.yml)
-
 [![Deploy App to AWS AppRunner](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/ecr.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/ecr.yml)
 
 [![Deploy RDS with CloudFormation](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/deploy_rds.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/deploy_rds.yml)
@@ -18,7 +16,7 @@ Check CI/CD Status:
 # Natural Language to SQL Microservice
 
 ## Overview
-This project is a **microservice solution** designed to empower businesses to interact with their databases using **natural language questions**, removing the need for SQL expertise. It is a robust and scalable application that leverages AWS services and cutting-edge AI to convert human-readable queries into SQL commands, retrieve data from the database, and respond with answers in natural language.
+This project is a **microservice solution** designed to empower businesses to interact with their databases using **natural language questions**, removing the need for SQL expertise. It is a robust and scalable application that leverages AWS services and cutting-edge AI to convert human-readable queries into SQL commands, retrieve data from the database, and respond with answers in natural language. It leverages AWS services and AI-powered tools to deliver an efficient, cloud-native experience.
 
 ### Key Features:
 - **User-friendly Interface**: A simple web application for inputting natural language questions.
@@ -37,6 +35,7 @@ This microservice is designed for **business users** who need actionable insight
 - `no_of_ratings`
 - `discount_price`
 - `actual_price`
+This application is ideal for: retail inventory analysis, sales trend exploration, product category performance evaluation, etc. 
 
 ### Example Queries:
 - "What are the top-rated products in the electronics category?"
@@ -52,6 +51,7 @@ The application architecture is built entirely on AWS, ensuring scalability, rel
 5. **Deployment**: The application is containerized and deployed on **AWS AppRunner**, pulling images from **AWS ECR**.
 
 ## Technology Stack
+- **Backend**: Flask (Python)
 - **Programming Language**: Python
 - **Framework**: Flask
 - **AI Model**: Anthropic Claude 3.5 (via AWS Bedrock)
@@ -101,6 +101,10 @@ The project includes a CI/CD pipeline for streamlined development and deployment
 4. The SQL query is executed on the **AWS RDS** database.
 5. The results are converted back to natural language and displayed to the user.
 
+## Setup Instructions
+
+## Running the Application
+
 ## Future Enhancements
 - Support for additional databases.
 - Enhanced natural language understanding for complex queries.
@@ -111,3 +115,4 @@ For questions or contributions, please contact:
 **Project Maintainer**: [Your Name]  
 **Email**: [Your Email]  
 **GitHub**: [Your GitHub Profile]
+

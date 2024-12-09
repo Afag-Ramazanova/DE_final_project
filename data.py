@@ -1,9 +1,10 @@
 import sqlite3
 
+
 def process_message(message):
     # Connect to the SQLite database using a context manager
     try:
-        with sqlite3.connect('data/products.db') as conn:
+        with sqlite3.connect("data/products.db") as conn:
             cursor = conn.cursor()
 
             # If the message contains an SQL query (e.g., SELECT * FROM ...)
