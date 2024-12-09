@@ -21,17 +21,20 @@ logger = logging.getLogger()
 @app.route("/")
 def index():
     logger.info("Index page accessed")
+    print("Index page accessed")
     return render_template("webpage.html")
 
 @app.route("/schema")
 def schema():
     logger.info("Schema page accessed")
+    print("Schema page accessed")
     return render_template("schema.html")
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
     # Get the message from the form
     message = request.form["chatMessage"]
+    print(f"Received message: {message}")
     logger.info(f"Received message: {message}")
 
     # Log the message with the timestamp in message.csv
