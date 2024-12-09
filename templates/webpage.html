@@ -135,6 +135,7 @@
             padding: 5px 10px; /* Optional: add padding */
             border-radius: 8px; /* Optional: round the edges */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: slight shadow */
+            width: fit-content;
         }
 
         .logo {
@@ -175,21 +176,24 @@
     <!-- Display results if they exist -->
     {% if message %}
         <div class="results">
-            <h2>Results:</h2>
+            <h2>Hello, happy to help!</h2>
             <p><strong>I received this question:</strong> {{ message }}</p>
             <p><strong>Based on my query,</strong> {{ natural_language_result }}</p>
         </div>
-
-
+        <div class="icon">
+            <img src="static/images/happy.png" alt="Chatbot Icon">
+        </div>
         <!-- Display SQL query and query result in smaller text -->
         <div class="small-text">
             <p><strong>For your reference:</strong></p>
             <p><strong>SQL Query:</strong> {{ sql_query }}</p>
             <p><strong>Query Result:</strong> {{ query_result }}</p>
         </div>
-    {% endif %}
+
+    {% else %}
     <div class="icon">
         <img src="static/images/happy.png" alt="Chatbot Icon">
     </div>
+    {% endif %}
 </body>
 </html>
