@@ -9,6 +9,7 @@ nbval
 
 # Web App
 flask
+pymysql
 
 # AWS
 boto3

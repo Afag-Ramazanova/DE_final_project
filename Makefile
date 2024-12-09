@@ -17,11 +17,7 @@ format:
 
 # Lint Python code
 lint:
-	ruff check backend/*.py
-
-# Lint Dockerfile
-container-lint:
-	docker run --rm -i hadolint/hadolint < backend/Dockerfile
+	ruff check *.py
 
 # Build the Docker image
 build:
