@@ -1,3 +1,37 @@
+# name: Test Code
+
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+
+#       - name: Set up Python
+#         uses: actions/setup-python@v4
+#         with:
+#           python-version: 3.8
+
+#       - name: Install dependencies
+#         run: |
+#           python -m venv venv
+#           source venv/bin/activate
+#           pip install --upgrade pip
+#           pip install -r requirements.txt
+
+#       - name: Run Tests (pytest)
+#         run: |
+#           source venv/bin/activate
+#           make test  # Run the test task from Makefile
+
+
 name: Test Code
 
 on:
@@ -26,7 +60,14 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Set environment variables from secrets
+        run: |
+          echo "RDS_HOST=${{ secrets.RDS_HOST }}" >> $GITHUB_ENV
+          echo "RDS_USER=${{ secrets.RDS_USER }}" >> $GITHUB_ENV
+          echo "RDS_PASSWORD=${{ secrets.RDS_PASSWORD }}" >> $GITHUB_ENV
+          echo "RDS_NAME=${{ secrets.RDS_NAME }}" >> $GITHUB_ENV
+
       - name: Run Tests (pytest)
         run: |
           source venv/bin/activate
-          make test  # Run the test task from Makefile
+          pytest test.py

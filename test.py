@@ -4,20 +4,47 @@ from lib.llm import convert_to_sql, generate_combined_response
 from dotenv import load_dotenv
 import os
 
-# Load environment variables from .env file
+# # Load environment variables from .env file
+# load_dotenv()
+
+# # Setup the database connection parameters from environment variables
+
+# db_host = os.getenv("RDS_HOST")
+# db_user = os.getenv("RDS_USER")
+# db_password = os.getenv("RDS_PASSWORD")
+# db_name = os.getenv("RDS_NAME")
+
+
+
+# # Make sure the required environment variables are loaded
+# assert db_host, "RDS_HOST is not set"
+# assert db_user, "RDS_USER is not set"
+# assert db_password, "RDS_PASSWORD is not set"
+# assert db_name, "RDS_NAME is not set"
+
+
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+
+# Load environment variables
 load_dotenv()
 
-# Setup the database connection parameters from environment variables
+# Fetch database credentials
 db_host = os.getenv("RDS_HOST")
 db_user = os.getenv("RDS_USER")
 db_password = os.getenv("RDS_PASSWORD")
 db_name = os.getenv("RDS_NAME")
 
-# Make sure the required environment variables are loaded
-assert db_host, "RDS_HOST is not set"
-assert db_user, "RDS_USER is not set"
-assert db_password, "RDS_PASSWORD is not set"
-assert db_name, "RDS_NAME is not set"
+# Log loaded environment variables (without sensitive data)
+logging.info(f"Loaded DB Host: {db_host}")
+logging.info(f"Using DB User: {db_user}")
+
+# Validate credentials
+if not all([db_host, db_user, db_password, db_name]):
+    raise EnvironmentError("One or more required environment variables are missing.")
+
 
 # Setup the database connection using AWS RDS (No SQLite setup needed)
 def execute_sql_query(sql_query):
