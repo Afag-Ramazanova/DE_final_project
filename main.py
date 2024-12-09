@@ -10,6 +10,9 @@ app = Flask(__name__)
 def index():
     return render_template("webpage.html")
 
+@app.route("/schema")
+def schema():
+    return render_template("schema.html")
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
