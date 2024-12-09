@@ -4,7 +4,7 @@ Check CI/CD Status:
 # AskSQl Natural Language to SQL Microservice
 [<img src="static/images/logo_new.png" alt="logo" width="400" height="150">](https://zztaz2qbqh.us-east-2.awsapprunner.com/)
 
-#### [Link to AskSQL](https://zztaz2qbqh.us-east-2.awsapprunner.com/)
+#### Click to access AskSQL ⬆️
 
 #### Contributors:
 [Afag Ramazanova](https://github.com/Afag-Ramazanova),
