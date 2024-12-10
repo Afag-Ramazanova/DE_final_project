@@ -8,6 +8,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
+    print("Index page accessed")
     return render_template("webpage.html")
 
 @app.route("/schema")
