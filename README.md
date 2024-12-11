@@ -1,7 +1,7 @@
 Check CI/CD Status: 
 
 [![Install Dependencies](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/install.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/install.yml) [![Lint Code](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/lint.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/lint.yml) [![Format Code](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/format.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/format.yml) [![Test Code](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/test.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/test.yml) [![Deploy App to AWS AppRunner](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/ecr.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/ecr.yml) [![Deploy RDS with CloudFormation](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/deploy_rds.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/deploy_rds.yml)
-# AskSQl Natural Language to SQL Microservice
+# AskSQL Natural Language to SQL Microservice
 [<img src="static/images/logo_new.png" alt="logo" width="400" height="150">](https://zztaz2qbqh.us-east-2.awsapprunner.com/)
 
 #### Click to access AskSQL ⬆️
@@ -25,7 +25,7 @@ This project is a **microservice solution** designed to empower businesses to in
 - **Cloud-Native Deployment**: Hosted on AWS using **AppRunner**, with container images stored in **ECR**.
 - **Performance Validated**: Load-tested to handle 10,000 requests per second.
 - **CI/CD Integration**: Automated pipeline for dependency installation, code linting, formatting, testing, and deployment.
-- **Infrastructure as Code**: Fully deployed using AWS CloudFormation for infrastructure setup and management.
+- **Infrastructure as Code**: Automatic AppRunner deployments for every new push to ECR.
 
 ## How It Works
 1. The user inputs a natural language question via the web interface.
@@ -62,9 +62,9 @@ The application architecture is built entirely on AWS, ensuring scalability, rel
 ![Architecture](static/images/IDS706_Final_Architecture.png)
 
 ## Technology Stack
-- **Backend**: Flask (Python)
+- **Backend**: Flask, with Gunicorn as a WSGI HTTP server
 - **Programming Language**: Python
-- **Framework**: Flask
+- **Containerization**: Docker distroless image
 - **AI Model**: Anthropic Claude 3.5 (via AWS Bedrock)
 - **Database**: AWS RDS (Relational Database Service)
 - **Cloud Services**:
