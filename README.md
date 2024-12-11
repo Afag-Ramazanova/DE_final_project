@@ -25,7 +25,7 @@ This project is a **microservice solution** designed to empower businesses to in
 - **Cloud-Native Deployment**: Hosted on AWS using **AppRunner**, with container images stored in **ECR**.
 - **Performance Validated**: Load-tested to handle 10,000 requests per second.
 - **CI/CD Integration**: Automated pipeline for dependency installation, code linting, formatting, testing, and deployment.
-- **Infrastructure as Code**: Automatic AppRunner deployments for every new push to ECR.
+- **Infrastructure as Code**: Automatic AppRunner deployments with every ECR push, & RDS instance creation through AWS CloudFormation.
 
 ## How It Works
 1. The user inputs a natural language question via the web interface.
@@ -55,7 +55,7 @@ This application is ideal for: retail inventory analysis, sales trend exploratio
 The application architecture is built entirely on AWS, ensuring scalability, reliability, and performance:
 1. **Web Interface**: Built with Flask for user interaction.
 2. **Query Conversion**: Natural language questions are sent to **Anthropic Claude 3.5** via AWS Bedrock to generate SQL queries.
-3. **Database Interaction**: SQL queries are executed against an **AWS RDS** database.
+3. **Database Interaction**: SQL queries are executed against an **AWS Relational Database Service** database.
 4. **Response Handling**: Results are translated back into natural language and displayed on the web interface.
 5. **Deployment**: The application is containerized and deployed on **AWS AppRunner**, pulling images from **AWS ECR**.
 
@@ -66,10 +66,10 @@ The application architecture is built entirely on AWS, ensuring scalability, rel
 - **Programming Language**: Python
 - **Containerization**: Docker distroless image
 - **AI Model**: Anthropic Claude 3.5 (via AWS Bedrock)
-- **Database**: AWS RDS (Relational Database Service)
+- **Database**: AWS RDS (MySQL)
 - **Cloud Services**:
-  - AWS AppRunner
-  - AWS Elastic Container Registry (ECR)
+  - AWS [AppRunner](https://us-east-2.console.aws.amazon.com/apprunner/home?region=us-east-2#/services/dashboard?service_arn=arn%3Aaws%3Aapprunner%3Aus-east-2%3A381492212823%3Aservice%2Fflask-auto-tarsl%2F3cac875beec04649847073f24571b2ba&active_tab=logs)
+  - AWS [Elastic Container Registry (ECR)](https://us-east-2.console.aws.amazon.com/ecr/repositories/private/381492212823/flask-app-tarsl?region=us-east-2)
   - AWS Bedrock
   - AWS CloudFormation (IaC)
 - **Load Testing**: Validated with a tool to ensure 10,000 requests per second.
@@ -79,7 +79,7 @@ The application architecture is built entirely on AWS, ensuring scalability, rel
   - Lint and format code
   - Test application
   - Build and push container image to ECR
-  - Deploy to AWS AppRunner
+  - Create RDS MySQL instance using AWS CloudFormation
 
 ## Deployment Instructions
 1. **Prerequisites**:
