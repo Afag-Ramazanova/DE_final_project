@@ -1,7 +1,7 @@
 import sqlite3
 import boto3
 import json
-from botocore.exceptions import ClientError
+from botocore.exceptions import ClientError, NoCredentialsError, PartialCredentialsError
 import os
 import pymysql
 from dotenv import load_dotenv
@@ -75,6 +75,12 @@ def convert_to_sql(user_prompt):
         return sql_query
     except ClientError as e:
         raise Exception(f"Bedrock ClientError: {e}")
+    except NoCredentialsError:
+        raise Exception(f"Bedrock NoCredentialsError: {e}")
+        #print("No credentials found. Ensure environment variables or IAM role are set correctly.")
+    except PartialCredentialsError as e:
+        raise Exception(f"Bedrock PartialCredentialsError: {e}")
+        #print(f"Partial credentials error: {e}")
     except Exception as e:
         raise Exception(f"Error: {e}")
 
