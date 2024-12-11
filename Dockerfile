@@ -11,7 +11,7 @@ COPY . /app
 RUN pip install --no-cache-dir --target=/app/dependencies -r requirements.txt
 
 # Step 2: Use a distroless base image
-FROM gcr.io/distroless/python3-debian12
+FROM gcr.io/distroless/python3
 
 # Set the working directory in the final image
 WORKDIR /app
