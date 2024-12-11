@@ -153,6 +153,11 @@
             border-radius: 8px; /* Optional: round the edges */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: slight shadow */
             width: fit-content;
+            max-width: 90%; /* Extend across the page */
+            margin-left: auto;
+            margin-right: auto;
+            overflow-y: auto;
+            height: 100px;
         }
 
         .logo {
@@ -191,7 +196,6 @@
         <button type="submit">Submit</button>
     </form>
 
-    <!-- Display results if they exist -->
     {% if message %}
         <div class="results">
             <h2>Hello, happy to help!</h2>
@@ -207,11 +211,6 @@
             <p><strong>SQL Query:</strong> {{ sql_query }}</p>
             <p><strong>Query Result:</strong> {{ query_result }}</p>
         </div>
-
-    <!-- {% else %}  -->
-    <!-- <div class="icon"> -->
-        <!-- <img src="static/images/happy.png" alt="Chatbot Icon"> -->
-    <!-- </div>  -->
     {% endif %}
 </body>
 </html>
