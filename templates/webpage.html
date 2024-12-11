@@ -35,6 +35,18 @@
             color: #444;
         }
 
+        .footer-link {
+    position: fixed;  /* Keeps the link at a fixed position on the page */
+    bottom: 40px;     /* 10px from the bottom of the page */
+    left: 50%;        /* Center the link horizontally */
+    transform: translateX(-50%);  /* Ensure the link is centered */
+    font-size: 14px;  /* Set font size */
+    color: #666;;   /* Specific font color */
+    text-decoration: none;  /* Remove underline from the link */
+    padding: 5px 10px;  /* Optional: Add padding for better visibility */
+
+}
+
         button {
             display: block;
             background-color: #007bff;
@@ -98,34 +110,6 @@
             overflow-y: scroll;
         }
 
-        /* Add the "tail" for the bubble */
-        .results::after {
-            content: '';
-            position: absolute;
-            bottom: -20px; /* Position the tail slightly lower */
-            left: 30px;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 20px 20px 0 20px; /* Triangle size */
-            border-color: #ffffff transparent transparent transparent; /* Match bubble color */
-            z-index: 2; /* Ensure it sits above the shadow */
-        }
-        
-        /* Shadow of the tail */
-        .results::before {
-            content: '';
-            position: absolute;
-            bottom: -23px; /* Slightly lower than the white tail */
-            left: 28px; /* Offset slightly for alignment */
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 22px 22px 0 22px; /* Slightly larger than the white tail */
-            border-color: rgba(0, 0, 0, 0.1) transparent transparent transparent; /* Shadow color */
-            z-index: 1; /* Place it behind the white tail */
-        }
-
         .results h2 {
             text-align: center;
         }
@@ -143,21 +127,22 @@
         .small-text {
             font-size: 12px;
             color: #666;
-            position: relative;
+            position: fixed;
             bottom: 10px; /* Adjust the vertical spacing */
             left: 50%; /* Start centering horizontally */
             transform: translateX(-50%); /* Complete horizontal centering */
             text-align: center;
             background-color: #e7e4e4;
-            padding: 5px 10px; /* Optional: add padding */
+            padding: 15px 15px; /* Optional: add padding */
             border-radius: 8px; /* Optional: round the edges */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: slight shadow */
             width: fit-content;
             max-width: 90%; /* Extend across the page */
             margin-left: auto;
             margin-right: auto;
+            margin-bottom: 87px;
             overflow-y: auto;
-            height: 100px;
+            height: 97px;
         }
 
         .logo {
@@ -213,4 +198,7 @@
         </div>
     {% endif %}
 </body>
+<a href="https://www.flaticon.com/free-icons/chatbot" title="chatbot icons" class="footer-link">
+    Chatbot icons created by littleicon - Flaticon
+</a>
 </html>
