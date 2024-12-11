@@ -26,7 +26,8 @@ ENV FLASK_APP=main.py
 EXPOSE 5000
 
 # Command to run the application using Gunicorn
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "main:app"]
+CMD ["flask", "run", "--host=0.0.0.0"]
+#CMD ["gunicorn", "-b", "0.0.0.0:5000", "main:app"]
 
 
 # # Use the official Python image from the Docker Hub
