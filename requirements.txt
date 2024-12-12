@@ -1,10 +1,10 @@
 # Formatting
-black
-ruff
+black==22.10.0
+ruff==0.0.251
 
 # Testing
-pytest
-pytest-cov
+pytest==7.1.2
+pytest-cov==3.0.0
 
 # Web App
 flask
@@ -17,3 +17,16 @@ boto3
 
 # Load Test
 locust
+
+
+
+
+
+# Web App
+#flask==2.2.3
+
+# AWS
+#boto3==1.26.12
+
+# Load Test
+#locust==2.5.0
