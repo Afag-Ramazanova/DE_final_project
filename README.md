@@ -68,11 +68,11 @@ The application architecture is built entirely on AWS, ensuring scalability, rel
 - **AI Model**: Anthropic Claude 3.5 (via AWS Bedrock)
 - **Database**: AWS RDS (MySQL)
 - **Cloud Services**:
-  - AWS [AppRunner](https://us-east-2.console.aws.amazon.com/apprunner/home?region=us-east-2#/services/dashboard?service_arn=arn%3Aaws%3Aapprunner%3Aus-east-2%3A381492212823%3Aservice%2Fflask-auto-tarsl%2F3cac875beec04649847073f24571b2ba&active_tab=logs)
-  - AWS [Elastic Container Registry (ECR)](https://us-east-2.console.aws.amazon.com/ecr/repositories/private/381492212823/flask-app-tarsl?region=us-east-2)
+  - AWS [AppRunner](https://us-east-2.console.aws.amazon.com/apprunner/home?region=us-east-2#/services/dashboard?service_arn=arn%3Aaws%3Aapprunner%3Aus-east-2%3A381492212823%3Aservice%2Fflask-auto-tarsl%2F3cac875beec04649847073f24571b2ba&active_tab=logs): for deploying and scaling containerized web applications without managing servers
+  - AWS [Elastic Container Registry (ECR)](https://us-east-2.console.aws.amazon.com/ecr/repositories/private/381492212823/flask-app-tarsl?region=us-east-2): for storing and deploying Docker container images for use with container orchestration services
   - AWS Bedrock
-  - AWS CloudFormation (IaC)
-  - AWS Secrets Manager
+  - AWS CloudFormation (IaC): for provisioning and managing AWS resources in a safe, repeatable, and predictable way using Infrastructure as Code (IaC) templates.
+  - AWS Secrets Manager: for storing and managing sensitive information like API keys, passwords, and database credentials securely
 - **Load Testing**: Validated with a tool to ensure 10,000 requests per second.
 
 - **CI/CD Pipeline**:
