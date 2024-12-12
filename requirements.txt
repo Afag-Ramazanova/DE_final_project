@@ -10,23 +10,15 @@ pytest-cov==3.0.0
 flask==2.2.5
 pymysql==1.1.1
 python-dotenv==1.0.1
-gunicorn
+gunicorn==23.0.0
 
 # AWS
 boto3==1.35.76
 
 # Load Test
-locust
+locust==2.5.0
 
 
-
-
-
-# Web App
-#flask==2.2.3
-
-# AWS
-#boto3==1.26.12
 
 # Load Test
 #locust==2.5.0
