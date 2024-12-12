@@ -72,6 +72,7 @@ The application architecture is built entirely on AWS, ensuring scalability, rel
   - AWS [Elastic Container Registry (ECR)](https://us-east-2.console.aws.amazon.com/ecr/repositories/private/381492212823/flask-app-tarsl?region=us-east-2)
   - AWS Bedrock
   - AWS CloudFormation (IaC)
+  - AWS Secrets Manager
 - **Load Testing**: Validated with a tool to ensure 10,000 requests per second.
 
 - **CI/CD Pipeline**:
