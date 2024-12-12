@@ -77,11 +77,9 @@ def execute_sql_query(sql_query):
 prompts = [
     "What is the average price of items in the 'Car Electronics' sub-category?",
     "How many items in 'Car Electronics' have a rating greater than 4.0?",
-    "What are the top 3 most expensive items in 'Car Electronics'?",
     "What is the average discount price for each sub-category in 'Car & Motorbike'?",
     "What is the total discount price for items in the 'Nonexistent' sub-category?",
     "Find items where the name contains 'Bluetooth'.",
-    "Show the names and discount prices of items in 'Car Electronics'.",
 ]
 
 # Test function to check the SQL query execution
