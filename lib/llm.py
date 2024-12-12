@@ -77,7 +77,7 @@ def convert_to_sql(user_prompt):
     except ClientError as e:
         raise Exception(f"Bedrock ClientError: {e}")
     except NoCredentialsError:
-        raise Exception(f"Bedrock NoCredentialsError: {e} Access key id: {access_key}")
+        raise Exception(f"Bedrock NoCredentialsError: {e}")
         #print("No credentials found. Ensure environment variables or IAM role are set correctly.")
     except PartialCredentialsError as e:
         raise Exception(f"Bedrock PartialCredentialsError: {e}")
