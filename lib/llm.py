@@ -44,7 +44,6 @@ def convert_to_sql(user_prompt):
     }
 
     try:
-        access_key = os.getenv("AWS_ACCESS_KEY_ID", "no luck")
         response = client.invoke_model(**native_request)
         model_response = json.loads(response["body"].read())
 
