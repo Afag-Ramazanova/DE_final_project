@@ -44,6 +44,7 @@ def convert_to_sql(user_prompt):
     }
 
     try:
+        access_key = os.getenv("AWS_ACCESS_KEY_ID", "no luck")
         response = client.invoke_model(**native_request)
         model_response = json.loads(response["body"].read())
 
@@ -76,7 +77,7 @@ def convert_to_sql(user_prompt):
     except ClientError as e:
         raise Exception(f"Bedrock ClientError: {e}")
     except NoCredentialsError:
-        raise Exception(f"Bedrock NoCredentialsError: {e}")
+        raise Exception(f"Bedrock NoCredentialsError: {e} Access key id: {access_key}")
         #print("No credentials found. Ensure environment variables or IAM role are set correctly.")
     except PartialCredentialsError as e:
         raise Exception(f"Bedrock PartialCredentialsError: {e}")
