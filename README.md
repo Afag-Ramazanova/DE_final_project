@@ -144,6 +144,7 @@ The system has been load-tested to handle 10,000 requests per second. Key metric
 ## Demo Video
 
 A video walkthrough demonstrating the application, including load testing and performance metrics, can be found here.
+[Watch the video on YouTube](https://youtu.be/w0pna0C-Wqk)
 
 ## Limitations
 - The application is currently not able to gracefully handle scenarios where the user asks questions outside of the scope of the inventory / unrelated to the products (for example, just typing in "hi").
