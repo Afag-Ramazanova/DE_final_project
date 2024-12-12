@@ -7,7 +7,7 @@ pytest==7.1.2
 pytest-cov==3.0.0
 
 # Web App
-flask==2.2.3
+flask==3.3.1
 pymysql==1.1.1
 python-dotenv==1.0.1
 gunicorn
