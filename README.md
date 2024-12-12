@@ -1,7 +1,7 @@
 Check CI/CD Status: 
 
 [![Install Dependencies](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/install.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/install.yml) [![Lint Code](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/lint.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/lint.yml) [![Format Code](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/format.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/format.yml) [![Test Code](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/test.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/test.yml) [![Deploy App to AWS AppRunner](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/ecr.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/ecr.yml) [![Deploy RDS with CloudFormation](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/deploy_rds.yml/badge.svg)](https://github.com/Afag-Ramazanova/DE_final_project/actions/workflows/deploy_rds.yml)
-# AskSQL Natural Language-to-SQL Microservice
+# AskSQL Natural Language to SQL Microservice
 [<img src="static/images/logo_new.png" alt="logo" width="400" height="150">](https://zztaz2qbqh.us-east-2.awsapprunner.com/)
 
 #### Click to access AskSQL ⬆️
@@ -25,7 +25,7 @@ This project is a **microservice solution** designed to empower businesses to in
 - **Cloud-Native Deployment**: Hosted on AWS using **AppRunner**, with container images stored in **ECR**.
 - **Performance Validated**: Load-tested to handle 10,000 requests per second.
 - **CI/CD Integration**: Automated pipeline for dependency installation, code linting, formatting, testing, and deployment.
-- **Infrastructure as Code**: Automatic AppRunner deployments with every ECR push, & RDS instance creation through AWS CloudFormation.
+- **Infrastructure as Code**: Fully deployed using AWS CloudFormation for infrastructure setup and management.
 
 ## How It Works
 1. The user inputs a natural language question via the web interface.
@@ -45,6 +45,19 @@ This microservice is designed for **business (inventory) users** who need action
 - `actual_price`
 
 This application is ideal for: retail inventory analysis, sales trend exploration, product category performance evaluation, etc. 
+      
+ "Dear User,
+
+   To enhance your experience with our system, we’ve prepared a quick guide to the available categories in our database. These categories will help you craft your queries and explore data effectively."
+
+**Main Categories:**
+      
+      Accessories, Appliances, Bags & Luggage, Beauty & Health, Car & Motorbike, Grocery & Gourmet Foods, Home & Kitchen, Home, Kitchen, Pets, Industrial Supplies, Kids' Fashion, Men's Clothing, Men's Shoes, Music, Pet Supplies, Sports & Fitness, Stores, Toys & Baby Products, TV, Audio & Cameras, Women's Clothing, and Women's Shoes.
+
+**Sub-Categories:**
+      
+      Air Conditioners, All Appliances, All Car & Motorbike Products, All Electronics, All Exercise & Fitness, All Grocery & Gourmet Foods, All Home & Kitchen, All Pet Supplies, All Sports, Fitness & Outdoors, Amazon Fashion, Baby Bath, Skin & Grooming, Baby Fashion, Baby Products, Backpacks, Badminton, Bags & Luggage, Ballerinas, Beauty & Grooming, Bedroom Linen, Camera Accessories, Cameras, Camping & Hiking, Car & Bike Care, Car Accessories, Car Electronics, Car Parts, Cardio Equipment, Casual Shoes, Clothing, Coffee, Tea & Beverages, Cricket, Cycling, Diapers, Diet & Nutrition, Dog Supplies, Ethnic Wear, Fashion & Silver Jewellery, Fashion Sales & Deals, Fashion Sandals, Fitness Accessories, Football, Formal Shoes, Furniture, Garden & Outdoors, Gold & Diamond Jewellery, Handbags & Clutches, Headphones, Health & Personal Care, Heating & Cooling Appliances, Home Audio & Theater, Home Décor, Home Entertainment Systems, Home Furnishing, Home Improvement, Home Storage, Household Supplies, Indoor Lighting, Industrial & Scientific Supplies, Innerwear, International Toy Store, Janitorial & Sanitation Supplies, Jeans, Jewellery, Kids' Clothing, Kids' Fashion, Kids' Shoes, Kids' Watches, Kitchen & Dining, Kitchen & Home Appliances, Kitchen Storage & Containers, Lab & Scientific, Lingerie & Nightwear, Luxury Beauty, Make-Up, Men's Fashion, Motorbike Accessories & Parts, Musical Instruments & Professional Audio, Nursing & Feeding, Personal Care Appliances, Refrigerators, Refurbished & Open Box, Rucksacks, Running, School Bags, Security Cameras, Sewing & Craft Supplies, Shirts, Shoes, Snack Foods, Speakers, Sports Shoes, Sportswear, STEM Toys Store, Strength Training, Strollers & Prams, Suitcases & Trolley Bags, Sunglasses, T-Shirts & Polos, Televisions, Test, Measure & Inspect, The Designer Boutique, Toys & Games, Toys Gifting Store, Travel Accessories, Travel Duffles, Value Bazaar, Wallets, Washing Machines, Watches, Western Wear, Women's Fashion, and Yoga.
+
 
 ### Example Queries:
 - "Can you find all items with Bluetooth in their name?"
@@ -55,24 +68,23 @@ This application is ideal for: retail inventory analysis, sales trend exploratio
 The application architecture is built entirely on AWS, ensuring scalability, reliability, and performance:
 1. **Web Interface**: Built with Flask for user interaction.
 2. **Query Conversion**: Natural language questions are sent to **Anthropic Claude 3.5** via AWS Bedrock to generate SQL queries.
-3. **Database Interaction**: SQL queries are executed against an **AWS Relational Database Service** database.
+3. **Database Interaction**: SQL queries are executed against an **AWS RDS** database.
 4. **Response Handling**: Results are translated back into natural language and displayed on the web interface.
 5. **Deployment**: The application is containerized and deployed on **AWS AppRunner**, pulling images from **AWS ECR**.
 
 ![Architecture](static/images/IDS706_Final_Architecture.png)
 
 ## Technology Stack
-- **Backend**: Flask, with Gunicorn as a WSGI HTTP server
+- **Backend**: Flask (Python)
 - **Programming Language**: Python
-- **Containerization**: Docker distroless image
+- **Framework**: Flask
 - **AI Model**: Anthropic Claude 3.5 (via AWS Bedrock)
-- **Database**: AWS RDS (MySQL)
+- **Database**: AWS RDS (Relational Database Service)
 - **Cloud Services**:
-  - AWS [AppRunner](https://us-east-2.console.aws.amazon.com/apprunner/home?region=us-east-2#/services/dashboard?service_arn=arn%3Aaws%3Aapprunner%3Aus-east-2%3A381492212823%3Aservice%2Fflask-auto-tarsl%2F3cac875beec04649847073f24571b2ba&active_tab=logs): for deploying and scaling containerized web applications without managing servers
-  - AWS [Elastic Container Registry (ECR)](https://us-east-2.console.aws.amazon.com/ecr/repositories/private/381492212823/flask-app-tarsl?region=us-east-2): for storing and deploying Docker container images for use with container orchestration services
+  - AWS AppRunner
+  - AWS Elastic Container Registry (ECR)
   - AWS Bedrock
-  - AWS CloudFormation (IaC): for provisioning and managing AWS resources in a safe, repeatable, and predictable way using Infrastructure as Code (IaC) templates.
-  - AWS Secrets Manager: for storing and managing sensitive information like API keys, passwords, and database credentials securely
+  - AWS CloudFormation (IaC)
 - **Load Testing**: Validated with a tool to ensure 10,000 requests per second.
 
 - **CI/CD Pipeline**:
@@ -80,7 +92,7 @@ The application architecture is built entirely on AWS, ensuring scalability, rel
   - Lint and format code
   - Test application
   - Build and push container image to ECR
-  - Create RDS MySQL instance using AWS CloudFormation
+  - Deploy to AWS AppRunner
 
 ## Deployment Instructions
 1. **Prerequisites**:
@@ -117,12 +129,7 @@ The system has been load-tested to handle 10,000 requests per second. Key metric
 
 - The detailed assessment is accessible here: [PDF](quant_assessment/Locustfinal.pdf), [CSV](quant_assessment/Locust_2024-12-09-13h05_load_test.py_https___zztaz2qbqh.us-east-2.awsapprunner.com_requests.csv)
 
-Statistics:
 ![request](quant_assessment/request_stats.png)
-
-Visual Representation:
-![graph](quant_assessment/requests_graph.png)
-
 
 ## Demo Video
 

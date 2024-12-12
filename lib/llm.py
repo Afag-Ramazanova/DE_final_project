@@ -16,17 +16,161 @@ def convert_to_sql(user_prompt):
     # Retrieve table name from environment
     table_name = os.getenv("table_name", "items")
 
-    # Updated prompt with schema details
+    # List of main categories and sub-categories
+    main_categories = [
+        "ACCESSORIES",
+        "APPLIANCES",
+        "BAGS & LUGGAGE",
+        "BEAUTY & HEALTH",
+        "CAR & MOTORBIKE",
+        "GROCERY & GOURMET FOODS",
+        "HOME & KITCHEN",
+        "HOME",
+        "KITCHEN",
+        "PETS",
+        "INDUSTRIAL SUPPLIES",
+        "KIDS' FASHION",
+        "MEN'S CLOTHING",
+        "MEN'S SHOES",
+        "MUSIC",
+        "PET SUPPLIES",
+        "SPORTS & FITNESS",
+        "STORES",
+        "TOYS & BABY PRODUCTS",
+        "TV, AUDIO & CAMERAS",
+        "WOMEN'S CLOTHING",
+        "WOMEN'S SHOES",
+    ]
+    sub_categories = [
+        "AIR CONDITIONERS",
+        "ALL APPLIANCES",
+        "ALL CAR & MOTORBIKE PRODUCTS",
+        "ALL ELECTRONICS",
+        "ALL EXERCISE & FITNESS",
+        "ALL GROCERY & GOURMET FOODS",
+        "ALL HOME & KITCHEN",
+        "ALL PET SUPPLIES",
+        "ALL SPORTS, FITNESS & OUTDOORS",
+        "AMAZON FASHION",
+        "BABY BATH, SKIN & GROOMING",
+        "BABY FASHION",
+        "BABY PRODUCTS",
+        "BACKPACKS",
+        "BADMINTON",
+        "BAGS & LUGGAGE",
+        "BALLERINAS",
+        "BEAUTY & GROOMING",
+        "BEDROOM LINEN",
+        "CAMERA ACCESSORIES",
+        "CAMERAS",
+        "CAMPING & HIKING",
+        "CAR & BIKE CARE",
+        "CAR ACCESSORIES",
+        "CAR ELECTRONICS",
+        "CAR PARTS",
+        "CARDIO EQUIPMENT",
+        "CASUAL SHOES",
+        "CLOTHING",
+        "COFFEE, TEA & BEVERAGES",
+        "CRICKET",
+        "CYCLING",
+        "DIAPERS",
+        "DIET & NUTRITION",
+        "DOG SUPPLIES",
+        "ETHNIC WEAR",
+        "FASHION & SILVER JEWELLERY",
+        "FASHION SALES & DEALS",
+        "FASHION SANDALS",
+        "FITNESS ACCESSORIES",
+        "FOOTBALL",
+        "FORMAL SHOES",
+        "FURNITURE",
+        "GARDEN & OUTDOORS",
+        "GOLD & DIAMOND JEWELLERY",
+        "HANDBAGS & CLUTCHES",
+        "HEADPHONES",
+        "HEALTH & PERSONAL CARE",
+        "HEATING & COOLING APPLIANCES",
+        "HOME AUDIO & THEATER",
+        "HOME DÉCOR",
+        "HOME ENTERTAINMENT SYSTEMS",
+        "HOME FURNISHING",
+        "HOME IMPROVEMENT",
+        "HOME STORAGE",
+        "HOUSEHOLD SUPPLIES",
+        "INDOOR LIGHTING",
+        "INDUSTRIAL & SCIENTIFIC SUPPLIES",
+        "INNERWEAR",
+        "INTERNATIONAL TOY STORE",
+        "JANITORIAL & SANITATION SUPPLIES",
+        "JEANS",
+        "JEWELLERY",
+        "KIDS' CLOTHING",
+        "KIDS' FASHION",
+        "KIDS' SHOES",
+        "KIDS' WATCHES",
+        "KITCHEN & DINING",
+        "KITCHEN & HOME APPLIANCES",
+        "KITCHEN STORAGE & CONTAINERS",
+        "LAB & SCIENTIFIC",
+        "LINGERIE & NIGHTWEAR",
+        "LUXURY BEAUTY",
+        "MAKE-UP",
+        "MEN'S FASHION",
+        "MOTORBIKE ACCESSORIES & PARTS",
+        "MUSICAL INSTRUMENTS & PROFESSIONAL AUDIO",
+        "NURSING & FEEDING",
+        "PERSONAL CARE APPLIANCES",
+        "REFRIGERATORS",
+        "REFURBISHED & OPEN BOX",
+        "RUCKSACKS",
+        "RUNNING",
+        "SCHOOL BAGS",
+        "SECURITY CAMERAS",
+        "SEWING & CRAFT SUPPLIES",
+        "SHIRTS",
+        "SHOES",
+        "SNACK FOODS",
+        "SPEAKERS",
+        "SPORTS SHOES",
+        "SPORTSWEAR",
+        "STEM TOYS STORE",
+        "STRENGTH TRAINING",
+        "STROLLERS & PRAMS",
+        "SUITCASES & TROLLEY BAGS",
+        "SUNGLASSES",
+        "T-SHIRTS & POLOS",
+        "TELEVISIONS",
+        "TEST, MEASURE & INSPECT",
+        "THE DESIGNER BOUTIQUE",
+        "TOYS & GAMES",
+        "TOYS GIFTING STORE",
+        "TRAVEL ACCESSORIES",
+        "TRAVEL DUFFLES",
+        "VALUE BAZAAR",
+        "WALLETS",
+        "WASHING MACHINES",
+        "WATCHES",
+        "WESTERN WEAR",
+        "WOMEN'S FASHION",
+        "YOGA",
+    ]
+
+    # Normalize user prompt by replacing 'and' with '&' where applicable
+    normalized_prompt = user_prompt.upper().replace(" AND ", " & ")
+
+    # Build the prompt dynamically based on schema
     prompt = (
         f"The database has the following schema: "
         f"{table_name}(name, main_category, sub_category, ratings, no_of_ratings, "
         f"discount_price, actual_price). "
         "All string columns (name, main_category, sub_category) need to be UPPERCASEd. "
-        "If calculating the standard deviation, use the formula to approximate it. "
-        f"Convert the following natural language query into a MySQL query: {user_prompt}"
+        f"If the prompt involves categories from {main_categories}, use 'main_category'. "
+        f"If it involves categories from {sub_categories}, use 'sub_category'. "
+        f"Convert the following natural language query into a MySQL query: {normalized_prompt}."
     )
 
-    # Format the request payload for the LLM
+    # Prepare the request payload for the LLM
     native_request = {
         "modelId": "anthropic.claude-3-5-haiku-20241022-v1:0",
         "contentType": "application/json",
@@ -50,29 +194,26 @@ def convert_to_sql(user_prompt):
         # Log full model response for debugging
         print("Full Model Response:", model_response)
 
-        # Extract SQL query from nested structure
+        # Extract SQL query from the LLM response
         raw_content_list = model_response.get("content", [])
         raw_content = raw_content_list[0].get("text", "") if raw_content_list else ""
 
-        # Extract SQL from response content
+        # Extract SQL from response content if markdown exists
         if "```sql" in raw_content:
             start_idx = raw_content.find("```sql") + len("```sql")
             end_idx = raw_content.find("```", start_idx)
             sql_query = raw_content[start_idx:end_idx].strip()
-
-            # Normalize query strings to ensure case insensitivity
             sql_query = sql_query.replace("sub_category =", "UPPER(sub_category) =")
+            sql_query = sql_query.replace("main_category =", "UPPER(main_category) =")
         else:
             sql_query = raw_content.strip()
 
-        # Fallback for empty query
-        if not sql_query:
-            print(
-                "The model did not generate a valid SQL query. Falling back to a predefined query."
-            )
+        if not validate_sql_query(sql_query):
+            return "This query does not match any valid database schema. Please try a different query."
 
         print("Extracted SQL Query:", sql_query)
         return sql_query
+
     except ClientError as e:
         raise Exception(f"Bedrock ClientError: {e}")
     except NoCredentialsError:
@@ -208,7 +349,7 @@ def validate_sql_query(sql_query):
 
 
 def main():
-    user_prompt = "How many items in the 'Car Electronics' sub-category have a rating greater than 4.0?"
+    user_prompt = "most expensive item in women's clothing"
     try:
         user_prompt = user_prompt.upper()  # Ensure case consistency
         sql_query = convert_to_sql(user_prompt)
