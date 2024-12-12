@@ -20,14 +20,14 @@ WORKDIR /app
 COPY --from=builder /app /app
 
 # Set the environment variable for Flask
-ENV FLASK_APP=main_logging.py
+ENV FLASK_APP=main.py
 ENV PYTHONPATH=/app/dependencies
 
 # Expose the required port
 EXPOSE 5000
 
 # Command to run the application using Gunicorn
-CMD ["/app/dependencies/bin/gunicorn", "-b", "0.0.0.0:5000", "main_logging:app"]
+CMD ["/app/dependencies/bin/gunicorn", "-b", "0.0.0.0:5000", "main:app"]
 #CMD ["flask", "run", "--host=0.0.0.0"]
 #CMD ["gunicorn", "-b", "0.0.0.0:5000", "main:app"]
 

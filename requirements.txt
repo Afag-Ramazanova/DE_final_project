@@ -5,7 +5,6 @@ ruff
 # Testing
 pytest
 pytest-cov
-nbval
 
 # Web App
 flask
