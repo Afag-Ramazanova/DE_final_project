@@ -25,7 +25,7 @@ This project is a **microservice solution** designed to empower businesses to in
 - **Cloud-Native Deployment**: Hosted on AWS using **AppRunner**, with container images stored in **ECR**.
 - **Performance Validated**: Load-tested to handle 10,000 requests per second.
 - **CI/CD Integration**: Automated pipeline for dependency installation, code linting, formatting, testing, and deployment.
-- **Infrastructure as Code**: Fully deployed using AWS CloudFormation for infrastructure setup and management.
+- **Infrastructure as Code**: Automatic AppRunner deployments with every ECR push, & RDS instance creation through AWS CloudFormation.
 
 ## How It Works
 1. The user inputs a natural language question via the web interface.
@@ -68,23 +68,25 @@ This application is ideal for: retail inventory analysis, sales trend exploratio
 The application architecture is built entirely on AWS, ensuring scalability, reliability, and performance:
 1. **Web Interface**: Built with Flask for user interaction.
 2. **Query Conversion**: Natural language questions are sent to **Anthropic Claude 3.5** via AWS Bedrock to generate SQL queries.
-3. **Database Interaction**: SQL queries are executed against an **AWS RDS** database.
+3. **Database Interaction**: SQL queries are executed against an **AWS Relational Dabase Service (RDS)** database.
 4. **Response Handling**: Results are translated back into natural language and displayed on the web interface.
 5. **Deployment**: The application is containerized and deployed on **AWS AppRunner**, pulling images from **AWS ECR**.
 
 ![Architecture](static/images/IDS706_Final_Architecture.png)
 
 ## Technology Stack
-- **Backend**: Flask (Python)
+- **Backend**: Flask, with Gunicorn as a WSGI HTTP server
 - **Programming Language**: Python
-- **Framework**: Flask
+- **Containerization**: Docker distroless image
 - **AI Model**: Anthropic Claude 3.5 (via AWS Bedrock)
-- **Database**: AWS RDS (Relational Database Service)
+- **Database**: AWS RDS (MySQL)
 - **Cloud Services**:
-  - AWS AppRunner
-  - AWS Elastic Container Registry (ECR)
+  - AWS [AppRunner](https://us-east-2.console.aws.amazon.com/apprunner/home?region=us-east-2#/services/dashboard?service_arn=arn%3Aaws%3Aapprunner%3Aus-east-2%3A381492212823%3Aservice%2Fflask-auto-tarsl%2F3cac875beec04649847073f24571b2ba&active_tab=logs): for deploying and scaling containerized web applications without managing servers
+  - AWS [Elastic Container Registry (ECR)](https://us-east-2.console.aws.amazon.com/ecr/repositories/private/381492212823/flask-app-tarsl?region=us-east-2)
   - AWS Bedrock
   - AWS CloudFormation (IaC)
+  - AWS Secrets Manager, for storing sensitive information required by the application to authenticate to Bedrock & RDS
+  - AWS CloudWatch, for storing application logs
 - **Load Testing**: Validated with a tool to ensure 10,000 requests per second.
 
 - **CI/CD Pipeline**:
@@ -92,7 +94,7 @@ The application architecture is built entirely on AWS, ensuring scalability, rel
   - Lint and format code
   - Test application
   - Build and push container image to ECR
-  - Deploy to AWS AppRunner
+  - Create RDS MySQL instance using AWS CloudFormation
 
 ## Deployment Instructions
 1. **Prerequisites**:
@@ -121,6 +123,11 @@ The project includes a CI/CD pipeline for streamlined development and deployment
 4. **Test Code**: Runs automated tests to validate functionality.
 5. **Deploy**: Builds and pushes the Docker image to ECR. AppRunner service is set up to automatically re-deploy the app when a new container image is pushed to ECR repository.
 
+## Application Logging
+Application logs are streamed to [CloudWatch](https://us-east-2.console.aws.amazon.com/cloudwatch/home?region=us-east-2#logsV2:log-groups/log-group/$252Faws$252Fapprunner$252Fflask-auto-tarsl$252F3cac875beec04649847073f24571b2ba$252Fapplication/log-events/instance$252Fd0bc550b632f4bc3b50630d97a78b1dc), and capture basic user interactions, Bedrock calls, as well as errors:
+
+<img width="1180" alt="Screenshot 2024-12-12 at 11 41 02 AM" src="https://github.com/user-attachments/assets/91c7de9c-9ee9-44a7-90d8-c011ae718294" />
+
 ## Quantitative Assessment
 
 The system has been load-tested to handle 10,000 requests per second. Key metrics include:
@@ -131,9 +138,20 @@ The system has been load-tested to handle 10,000 requests per second. Key metric
 
 ![request](quant_assessment/request_stats.png)
 
+
+![graph](quant_assessment/requests_graph.png)
+
 ## Demo Video
 
 A video walkthrough demonstrating the application, including load testing and performance metrics, can be found here.
+
+## Limitations
+- The application is currently not able to gracefully handle scenarios where the user asks questions outside of the scope of the inventory / unrelated to the products (for example, just typing in "hi").
+- The LLM sometimes has trouble recognizing the product category that is provided in the user prompt unless it is formatted exactly the way it expects (for example, a search for women's clothing yields unsuccessful results, but 'Women's Clothing' is recognized correctly).
+- Complex queries have a high response time, forcing the user to wait for at least a few seconds.
+
+## AI Pair Programming Use
+- GitHub CoPilot, ChatGPT, and Gemini provided valuable information when figuring out the code syntax and formatting of various components of the project, given that some team members did not have prior experience in web development and containerization. For example, it was used to create starter code for the Dockerfile, the frontend (HTML), the AWS Bedrock requests, and Flask application.
 
 ## Future Enhancements
 - Support for additional databases.
