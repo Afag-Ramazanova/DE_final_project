@@ -34,7 +34,8 @@ with open(
         if len(data_batch) == batch_size:
             cursor.executemany(
                 """
-                INSERT INTO items (name, main_category, sub_category, ratings, no_of_ratings, discount_price, actual_price)
+                INSERT INTO items (name, main_category, sub_category, \
+                ratings, no_of_ratings, discount_price, actual_price) \
                 VALUES (%s, %s, %s, %s, %s, %s, %s)
             """,
                 data_batch,
@@ -45,7 +46,8 @@ with open(
     if data_batch:
         cursor.executemany(
             """
-            INSERT INTO items (name, main_category, sub_category, ratings, no_of_ratings, discount_price, actual_price)
+            INSERT INTO items (name, main_category, sub_category, \
+            ratings, no_of_ratings, discount_price, actual_price) \
             VALUES (%s, %s, %s, %s, %s, %s, %s)
         """,
             data_batch,

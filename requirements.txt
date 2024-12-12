@@ -7,13 +7,13 @@ pytest==7.1.2
 pytest-cov==3.0.0
 
 # Web App
-flask
-pymysql
-python-dotenv
+flask==2.2.3
+pymysql==1.1.1
+python-dotenv==1.0.1
 gunicorn
 
 # AWS
-boto3
+boto3==1.26.12
 
 # Load Test
 locust
