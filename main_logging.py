@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 # Set up logging
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",  # Should log message and timestamp
     handlers=[
         logging.StreamHandler(),  # Output to stdout (Gunicorn will capture this)
