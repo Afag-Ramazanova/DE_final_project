@@ -8,14 +8,12 @@ app = Flask(__name__)
 # Set up logging
 logging.basicConfig(
     level=logging.DEBUG,
-    format="%(asctime)s [%(levelname)s] %(message)s", 
-    handlers=[
-        logging.StreamHandler(),  
-        logging.FileHandler("app.log")
-    ]
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[logging.StreamHandler(), logging.FileHandler("app.log")],
 )
 
 logger = logging.getLogger()
+
 
 @app.route("/")
 def index():
@@ -23,11 +21,13 @@ def index():
     print("Index page accessed")
     return render_template("webpage.html")
 
+
 @app.route("/schema")
 def schema():
     logger.info("Schema page accessed")
     print("Schema page accessed")
     return render_template("schema.html")
+
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
